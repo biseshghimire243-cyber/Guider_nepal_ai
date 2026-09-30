@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Destinations | Guider Nepal AI</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/destinations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar" id="navbar">
+
+        <a href="index.html" class="logo">
+
+            <div class="logo-symbol">
+                G
+            </div>
+
+            <div class="logo-text">
+                <strong>GUIDER</strong>
+                <span>NEPAL AI</span>
+            </div>
+
+        </a>
+
+        <nav class="nav-menu">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="destinations.html" class="active">
+                Destinations
+            </a>
+
+            <a href="countries.html">
+                Countries
+            </a>
+
+            <a href="activities.html">
+                Activities
+            </a>
+
+            <a href="trekking.html">
+                Trekking
+            </a>
+
+            <a href="travel-guide.html">
+                Travel Guide
+            </a>
+
+        </nav>
+
+        <div class="nav-actions">
+
+            <a href="login.html" class="login-link">
+                Login
+            </a>
+
+            <a href="register.html" class="nav-button">
+                Get Started
+            </a>
+
+        </div>
+
+        <button class="menu-button" id="menuButton">
+            ☰
+        </button>
+
+    </header>
+
+
+    <!-- =========================
+         MOBILE MENU
+    ========================== -->
+
+    <div class="mobile-menu" id="mobileMenu">
+
+        <a href="index.html">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="countries.html">Countries</a>
+        <a href="activities.html">Activities</a>
+        <a href="trekking.html">Trekking</a>
+        <a href="travel-guide.html">Travel Guide</a>
+
+        <div class="mobile-auth">
+
+            <a href="login.html">
+                Login
+            </a>
+
+            <a href="register.html">
+                Get Started
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         DESTINATION HERO
+    ========================== -->
+
+    <section class="destination-page-hero">
+
+        <div class="destination-page-overlay"></div>
+
+        <div class="destination-page-content">
+
+            <span class="section-label">
+                DISCOVER THE WORLD
+            </span>
+
+            <h1>
+                Explore
+                <span>Destinations</span>
+            </h1>
+
+            <p>
+                From the highest mountains of Nepal to
+                extraordinary places around the world,
+                find your next destination.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DESTINATION CONTENT
+    ========================== -->
+
+    <main class="destination-main">
+
+        <!-- SEARCH -->
+
+        <div class="destination-search">
+
+            <div class="destination-search-box">
+
+                <span>🔍</span>
+
+                <input
+                    type="text"
+                    id="destinationSearch"
+                    placeholder="Search destinations..."
+                >
+
+                <button id="clearSearch">
+                    Clear
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- FILTERS -->
+
+        <div class="destination-filters">
+
+            <button
+                class="filter-button active"
+                data-filter="all"
+            >
+                All
+            </button>
+
+            <button
+                class="filter-button"
+                data-filter="nepal"
+            >
+                🇳🇵 Nepal
+            </button>
+
+            <button
+                class="filter-button"
+                data-filter="himalaya"
+            >
+                🏔️ Himalayas
+            </button>
+
+            <button
+                class="filter-button"
+                data-filter="asia"
+            >
+                🌏 Asia
+            </button>
+
+            <button
+                class="filter-button"
+                data-filter="europe"
+            >
+                🇪🇺 Europe
+            </button>
+
+            <button
+                class="filter-button"
+                data-filter="adventure"
+            >
+                🥾 Adventure
+            </button>
+
+        </div>
+
+
+        <!-- RESULT COUNT -->
+
+        <div class="destination-result-header">
+
+            <h2>
+                Discover Places
+            </h2>
+
+            <span id="resultCount">
+                0 destinations
+            </span>
+
+        </div>
+
+
+        <!-- DESTINATIONS -->
+
+        <section
+            class="destination-list"
+            id="destinationList"
+        >
+        </section>
+
+
+        <!-- NO RESULTS -->
+
+        <div
+            class="no-results"
+            id="noResults"
+        >
+
+            <div class="no-results-icon">
+                🔍
+            </div>
+
+            <h2>
+                No destinations found
+            </h2>
+
+            <p>
+                Try another destination or category.
+            </p>
+
+            <button id="resetFilters">
+                Reset Search
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         CTA
+    ========================== -->
+
+    <section class="destination-cta">
+
+        <div>
+
+            <span class="section-label">
+                NEED INSPIRATION?
+            </span>
+
+            <h2>
+                Your Next Adventure
+                <span>Starts Here</span>
+            </h2>
+
+            <p>
+                Explore Nepal first, then discover the rest
+                of the world with Guider Nepal AI.
+            </p>
+
+            <a
+                href="travel-guide.html"
+                class="gold-button"
+            >
+                Plan Your Journey →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
+        <div class="footer-main">
+
+            <div class="footer-brand">
+
+                <a href="index.html" class="logo">
+
+                    <div class="logo-symbol">
+                        G
+                    </div>
+
+                    <div class="logo-text">
+                        <strong>GUIDER</strong>
+                        <span>NEPAL AI</span>
+                    </div>
+
+                </a>
+
+                <p>
+                    Explore Nepal, discover the Himalayas
+                    and experience the world.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Explore</h3>
+
+                <a href="destinations.html">
+                    Destinations
+                </a>
+
+                <a href="countries.html">
+                    Countries
+                </a>
+
+                <a href="activities.html">
+                    Activities
+                </a>
+
+                <a href="trekking.html">
+                    Trekking
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Guides</h3>
+
+                <a href="travel-guide.html">
+                    Travel Guide
+                </a>
+
+                <a href="travel-guide.html">
+                    Travel Tips
+                </a>
+
+                <a href="travel-guide.html">
+                    Safety
+                </a>
+
+                <a href="travel-guide.html">
+                    Budget
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Company</h3>
+
+                <a href="about.html">
+                    About
+                </a>
+
+                <a href="login.html">
+                    Login
+                </a>
+
+                <a href="register.html">
+                    Register
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Guider Nepal AI.
+                All rights reserved.
+            </p>
+
+            <p>
+                Built for explorers 🌍
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/destinations.js"></script>
+
+</body>
+
+</html>
