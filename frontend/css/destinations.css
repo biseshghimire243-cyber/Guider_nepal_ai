@@ -1,0 +1,593 @@
+/* ==========================================
+   DESTINATION PAGE HERO
+========================================== */
+
+.destination-page-hero {
+
+    min-height: 470px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    background-image:
+        url("https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=90");
+
+    background-size: cover;
+
+    background-position: center;
+}
+
+.destination-page-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            rgba(3, 12, 9, 0.55),
+            rgba(3, 12, 9, 0.9)
+        );
+}
+
+.destination-page-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 800px;
+
+    padding:
+        130px 20px 60px;
+}
+
+.destination-page-content h1 {
+
+    font-size:
+        clamp(50px, 7vw, 80px);
+
+    line-height: 1;
+
+    margin-bottom: 20px;
+}
+
+.destination-page-content h1 span {
+
+    color: var(--gold);
+}
+
+.destination-page-content p {
+
+    max-width: 650px;
+
+    margin: auto;
+
+    color: #ccc;
+
+    font-size: 16px;
+}
+
+
+/* ==========================================
+   DESTINATION MAIN
+========================================== */
+
+.destination-main {
+
+    padding:
+        80px 6% 110px;
+
+    background: var(--bg);
+}
+
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+.destination-search {
+
+    max-width: 800px;
+
+    margin:
+        0 auto 35px;
+}
+
+.destination-search-box {
+
+    display: flex;
+
+    align-items: center;
+
+    background: #ffffff;
+
+    border-radius: 50px;
+
+    padding: 6px 8px 6px 20px;
+}
+
+.destination-search-box span {
+
+    font-size: 18px;
+
+    color: #555;
+}
+
+.destination-search-box input {
+
+    flex: 1;
+
+    border: none;
+
+    outline: none;
+
+    padding:
+        15px;
+
+    font-size: 15px;
+
+    color: #222;
+
+    min-width: 0;
+}
+
+.destination-search-box button {
+
+    border: none;
+
+    background: #eee;
+
+    color: #555;
+
+    padding:
+        10px 18px;
+
+    border-radius: 30px;
+
+    transition: 0.3s;
+}
+
+.destination-search-box button:hover {
+
+    background: var(--gold);
+
+    color: #111;
+}
+
+
+/* ==========================================
+   FILTERS
+========================================== */
+
+.destination-filters {
+
+    max-width: 1200px;
+
+    margin:
+        0 auto 55px;
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.filter-button {
+
+    padding:
+        10px 18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+    border-radius: 30px;
+
+    background: #0d1b15;
+
+    color: #aaa;
+
+    font-size: 13px;
+
+    transition: 0.3s;
+}
+
+.filter-button:hover,
+.filter-button.active {
+
+    background: var(--gold);
+
+    border-color: var(--gold);
+
+    color: #111;
+}
+
+
+/* ==========================================
+   RESULT HEADER
+========================================== */
+
+.destination-result-header {
+
+    max-width: 1350px;
+
+    margin:
+        0 auto 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.destination-result-header h2 {
+
+    font-size: 27px;
+}
+
+.destination-result-header span {
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   DESTINATION LIST
+========================================== */
+
+.destination-list {
+
+    max-width: 1350px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 22px;
+}
+
+
+/* ==========================================
+   DESTINATION ITEM
+========================================== */
+
+.destination-item {
+
+    position: relative;
+
+    min-height: 420px;
+
+    overflow: hidden;
+
+    border-radius: 15px;
+
+    background-size: cover;
+
+    background-position: center;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.06);
+
+    transition:
+        transform 0.35s,
+        box-shadow 0.35s;
+}
+
+.destination-item:hover {
+
+    transform:
+        translateY(-7px);
+
+    box-shadow:
+        0 20px 45px
+        rgba(0,0,0,0.35);
+}
+
+.destination-item-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,0.95),
+            rgba(0,0,0,0.15)
+        );
+}
+
+.destination-item-content {
+
+    position: absolute;
+
+    left: 25px;
+
+    right: 25px;
+
+    bottom: 25px;
+
+    z-index: 2;
+}
+
+.destination-country {
+
+    display: inline-block;
+
+    color: var(--gold);
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+.destination-item-content h3 {
+
+    font-size: 28px;
+
+    line-height: 1.1;
+
+    margin-bottom: 7px;
+}
+
+.destination-item-content p {
+
+    color: #ccc;
+
+    font-size: 13px;
+
+    margin-bottom: 15px;
+}
+
+.destination-meta {
+
+    display: flex;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 15px;
+}
+
+.destination-meta span {
+
+    padding:
+        5px 9px;
+
+    background:
+        rgba(255,255,255,0.1);
+
+    border-radius: 20px;
+
+    color: #ddd;
+
+    font-size: 10px;
+}
+
+.destination-explore {
+
+    display: inline-block;
+
+    color: var(--gold);
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.destination-explore:hover {
+
+    transform:
+        translateX(5px);
+}
+
+
+/* ==========================================
+   FEATURED DESTINATION
+========================================== */
+
+.destination-item.featured {
+
+    grid-column:
+        span 2;
+}
+
+.destination-item.featured
+.destination-item-content h3 {
+
+    font-size: 35px;
+}
+
+
+/* ==========================================
+   NO RESULTS
+========================================== */
+
+.no-results {
+
+    display: none;
+
+    max-width: 500px;
+
+    margin:
+        70px auto;
+
+    text-align: center;
+}
+
+.no-results.show {
+
+    display: block;
+}
+
+.no-results-icon {
+
+    font-size: 50px;
+
+    margin-bottom: 15px;
+}
+
+.no-results h2 {
+
+    margin-bottom: 8px;
+}
+
+.no-results p {
+
+    color: var(--muted);
+
+    margin-bottom: 20px;
+}
+
+.no-results button {
+
+    border: none;
+
+    background: var(--gold);
+
+    color: #111;
+
+    padding:
+        11px 20px;
+
+    border-radius: 25px;
+
+    font-weight: bold;
+}
+
+
+/* ==========================================
+   CTA
+========================================== */
+
+.destination-cta {
+
+    padding:
+        110px 20px;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle,
+            #193329,
+            #07100d 65%
+        );
+}
+
+.destination-cta h2 {
+
+    font-size:
+        clamp(40px, 5vw, 65px);
+
+    line-height: 1;
+
+    margin-bottom: 20px;
+}
+
+.destination-cta h2 span {
+
+    color: var(--gold);
+}
+
+.destination-cta p {
+
+    max-width: 600px;
+
+    margin:
+        0 auto 30px;
+
+    color: var(--muted);
+}
+
+
+/* ==========================================
+   RESPONSIVE DESTINATIONS
+========================================== */
+
+@media (max-width: 1000px) {
+
+    .destination-list {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .destination-item.featured {
+
+        grid-column:
+            span 2;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .destination-main {
+
+        padding:
+            60px 5% 80px;
+    }
+
+    .destination-list {
+
+        grid-template-columns: 1fr;
+    }
+
+    .destination-item.featured {
+
+        grid-column: auto;
+    }
+
+    .destination-item.featured
+    .destination-item-content h3 {
+
+        font-size: 28px;
+    }
+
+    .destination-result-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+    .destination-search-box {
+
+        border-radius: 15px;
+    }
+
+    .destination-page-content h1 {
+
+        font-size: 50px;
+    }
+
+}
