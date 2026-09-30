@@ -1,0 +1,296 @@
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1150px) {
+
+    .nav-menu {
+
+        gap: 16px;
+    }
+
+    .nav-menu a {
+
+        font-size: 12px;
+    }
+
+    .activities-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .guide-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+/* ==========================================
+   950px
+========================================== */
+
+@media (max-width: 950px) {
+
+    .nav-menu,
+    .nav-actions {
+
+        display: none;
+    }
+
+    .menu-button {
+
+        display: block;
+    }
+
+    .nepal-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+
+        grid-template-rows:
+            350px
+            250px
+            250px;
+    }
+
+    .large-destination-card {
+
+        grid-row:
+            span 1;
+
+        grid-column:
+            span 2;
+    }
+
+    .world-section {
+
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+    }
+
+    .footer-main {
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+}
+
+
+/* ==========================================
+   700px
+========================================== */
+
+@media (max-width: 700px) {
+
+    .section {
+
+        padding:
+            80px 5%;
+    }
+
+    .hero-content {
+
+        padding:
+            130px
+            20px
+            170px;
+    }
+
+    .hero h1 {
+
+        letter-spacing: -2px;
+    }
+
+    .hero-description {
+
+        font-size: 15px;
+    }
+
+    .hero-search {
+
+        border-radius: 15px;
+
+        flex-wrap: wrap;
+
+        padding: 7px;
+    }
+
+    .search-icon {
+
+        padding-left: 12px;
+    }
+
+    .hero-search input {
+
+        min-width: 70%;
+    }
+
+    .hero-search button {
+
+        flex: 1;
+
+        padding: 13px;
+    }
+
+    .hero-stats {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        bottom: 20px;
+    }
+
+    .stat:nth-child(2) {
+
+        border-right: none;
+    }
+
+    .stat:nth-child(3),
+    .stat:nth-child(4) {
+
+        border-top:
+            1px solid
+            rgba(255,255,255,0.1);
+    }
+
+    .nepal-grid {
+
+        grid-template-columns: 1fr;
+
+        grid-template-rows:
+            repeat(5, 280px);
+    }
+
+    .large-destination-card {
+
+        grid-column: auto;
+
+        grid-row: auto;
+    }
+
+    .activities-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .guide-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .adventure-banner {
+
+        min-height: 500px;
+
+        padding:
+            60px 7%;
+    }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 500px) {
+
+    .logo-text {
+
+        display: none;
+    }
+
+    .hero-content {
+
+        padding:
+            120px
+            15px
+            170px;
+    }
+
+    .hero-badge {
+
+        font-size: 9px;
+
+        letter-spacing: 1.5px;
+    }
+
+    .hero h1 {
+
+        font-size: 52px;
+    }
+
+    .quick-search {
+
+        gap: 8px;
+    }
+
+    .quick-search span {
+
+        width: 100%;
+    }
+
+    .hero-stats {
+
+        width: 92%;
+    }
+
+    .stat {
+
+        padding: 12px 5px;
+    }
+
+    .stat strong {
+
+        font-size: 18px;
+    }
+
+    .stat span {
+
+        font-size: 9px;
+    }
+
+    .destination-info {
+
+        left: 18px;
+
+        bottom: 18px;
+    }
+
+    .destination-info h3 {
+
+        font-size: 23px;
+    }
+
+    .world-section {
+
+        padding:
+            80px 6%;
+    }
+
+    .region strong {
+
+        font-size: 20px;
+    }
+
+    .footer-main {
+
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+    }
+
+    .footer-bottom {
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+}
