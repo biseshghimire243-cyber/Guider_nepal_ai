@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Countries | Guider Nepal AI</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        .countries-page {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+
+        .countries-hero {
+            width: min(1200px, 92%);
+            margin: auto;
+            padding: 80px 0 55px;
+            text-align: center;
+        }
+
+        .countries-label {
+            color: var(--gold);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .countries-hero h1 {
+            font-size: clamp(42px, 7vw, 72px);
+            margin: 15px 0;
+        }
+
+        .countries-hero p {
+            max-width: 720px;
+            margin: auto;
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 17px;
+        }
+
+        .country-search {
+            width: min(650px, 100%);
+            margin: 35px auto 0;
+            position: relative;
+        }
+
+        .country-search input {
+            width: 100%;
+            padding: 17px 55px 17px 22px;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,.12);
+            background: rgba(255,255,255,.05);
+            color: white;
+            outline: none;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .country-search input:focus {
+            border-color: var(--gold);
+        }
+
+        .country-search i {
+            position: absolute;
+            right: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+        }
+
+        .countries-section {
+            width: min(1200px, 92%);
+            margin: auto;
+            padding-bottom: 80px;
+        }
+
+        .countries-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            gap: 20px;
+        }
+
+        .countries-header h2 {
+            margin: 0;
+        }
+
+        #countryCount {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .country-card {
+            min-height: 220px;
+            padding: 30px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,.1);
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.08),
+                    rgba(255,255,255,.025)
+                );
+            transition: transform .3s ease, border-color .3s ease;
+        }
+
+        .country-card:hover {
+            transform: translateY(-7px);
+            border-color: var(--gold);
+        }
+
+        .country-number {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 50px;
+            font-weight: 800;
+            opacity: .06;
+        }
+
+        .country-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,.07);
+            color: var(--gold);
+            font-size: 23px;
+            margin-bottom: 25px;
+        }
+
+        .country-card h3 {
+            font-size: 25px;
+            margin: 0 0 10px;
+        }
+
+        .country-card p {
+            color: var(--muted);
+            line-height: 1.6;
+            margin: 0 0 22px;
+        }
+
+        .country-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .country-link:hover {
+            gap: 13px;
+        }
+
+        .loading-countries,
+        .no-countries {
+            text-align: center;
+            padding: 70px 20px;
+            color: var(--muted);
+        }
+
+        .loading-countries i {
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 900px) {
+            .country-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .country-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .countries-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==========================================
+         NAVBAR
+         ========================================== -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                Guider<span>Nepal</span> AI
+            </a>
+
+            <button class="menu-button" id="menuButton">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="nav-links">
+
+                <a href="index.html">Home</a>
+
+                <a href="destinations.html">
+                    Destinations
+                </a>
+
+                <a href="countries.html" class="active">
+                    Countries
+                </a>
+
+                <a href="activities.html">
+                    Activities
+                </a>
+
+                <a href="trekking.html">
+                    Trekking
+                </a>
+
+                <a href="travel-guide.html">
+                    Travel Guide
+                </a>
+
+                <a href="login.html">
+                    Login
+                </a>
+
+                <a href="register.html" class="nav-button">
+                    Get Started
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="mobile-menu" id="mobileMenu">
+
+            <a href="index.html">Home</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="countries.html">Countries</a>
+            <a href="activities.html">Activities</a>
+            <a href="trekking.html">Trekking</a>
+            <a href="travel-guide.html">Travel Guide</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Get Started</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ==========================================
+         PAGE
+         ========================================== -->
+
+    <main class="countries-page">
+
+        <section class="countries-hero">
+
+            <div class="countries-label">
+                Explore The World
+            </div>
+
+            <h1>
+                Discover Countries
+            </h1>
+
+            <p>
+                Explore destinations across Nepal, the Himalayas
+                and the world. Discover places, cultures, landscapes
+                and unforgettable travel experiences.
+            </p>
+
+            <div class="country-search">
+
+                <input
+                    type="text"
+                    id="countrySearch"
+                    placeholder="Search countries..."
+                    autocomplete="off"
+                >
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            </div>
+
+        </section>
+
+
+        <section class="countries-section">
+
+            <div class="countries-header">
+
+                <h2>
+                    Explore Countries
+                </h2>
+
+                <span id="countryCount">
+                    Loading...
+                </span>
+
+            </div>
+
+            <div
+                class="country-grid"
+                id="countryGrid"
+            >
+
+                <div class="loading-countries">
+
+                    <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
+
+                    <p>
+                        Loading countries...
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div>
+                <h3>Guider Nepal AI</h3>
+
+                <p>
+                    Explore Nepal, the Himalayas and destinations
+                    around the world.
+                </p>
+            </div>
+
+            <div>
+                <h4>Explore</h4>
+
+                <a href="destinations.html">Destinations</a>
+                <a href="countries.html">Countries</a>
+                <a href="trekking.html">Trekking</a>
+            </div>
+
+            <div>
+                <h4>Guide</h4>
+
+                <a href="travel-guide.html">Travel Guide</a>
+                <a href="activities.html">Activities</a>
+                <a href="about.html">About</a>
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/countries.js"></script>
+
+</body>
+</html>
