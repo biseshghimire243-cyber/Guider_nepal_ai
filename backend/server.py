@@ -1,28 +1,57 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)
 
 
 # ==========================================
-# HOME / HEALTH CHECK
+# FRONTEND CONFIGURATION
+# ==========================================
+
+FRONTEND_FOLDER = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..", "frontend")
+)
+
+
+# ==========================================
+# HOME PAGE
 # ==========================================
 
 @app.route("/")
 def home():
-    return jsonify({
-        "success": True,
-        "message": "Himalaya Explorer API is running",
-        "project": "Guider Nepal AI"
-    })
+    return send_from_directory(FRONTEND_FOLDER, "index.html")
 
+
+# ==========================================
+# FRONTEND FILES
+# ==========================================
+
+@app.route("/<path:filename>")
+def frontend_files(filename):
+
+    file_path = os.path.join(FRONTEND_FOLDER, filename)
+
+    if os.path.isfile(file_path):
+        return send_from_directory(FRONTEND_FOLDER, filename)
+
+    return jsonify({
+        "success": False,
+        "message": "Frontend file not found"
+    }), 404
+
+
+# ==========================================
+# API HEALTH CHECK
+# ==========================================
 
 @app.route("/api/health")
 def health():
     return jsonify({
         "success": True,
-        "status": "Backend is working"
+        "status": "Backend is working",
+        "project": "Guider Nepal AI"
     })
 
 
@@ -31,6 +60,7 @@ def health():
 # ==========================================
 
 destinations = [
+
     {
         "id": 1,
         "name": "Mount Everest",
@@ -43,6 +73,7 @@ destinations = [
         "featured": True,
         "description": "Mount Everest is the highest mountain in the world and one of Nepal's most iconic destinations."
     },
+
     {
         "id": 2,
         "name": "Pokhara",
@@ -55,6 +86,7 @@ destinations = [
         "featured": False,
         "description": "Pokhara is famous for its lakes, mountain views, adventure activities and peaceful surroundings."
     },
+
     {
         "id": 3,
         "name": "Annapurna",
@@ -67,6 +99,7 @@ destinations = [
         "featured": False,
         "description": "The Annapurna region offers some of the most popular trekking routes in the Himalayas."
     },
+
     {
         "id": 4,
         "name": "Upper Mustang",
@@ -79,6 +112,7 @@ destinations = [
         "featured": False,
         "description": "Upper Mustang is known for its unique landscapes, ancient caves, monasteries and Tibetan culture."
     },
+
     {
         "id": 5,
         "name": "Kathmandu Valley",
@@ -91,6 +125,7 @@ destinations = [
         "featured": False,
         "description": "Kathmandu Valley is home to historic temples, cultural landmarks and UNESCO World Heritage sites."
     },
+
     {
         "id": 6,
         "name": "Chitwan",
@@ -103,6 +138,7 @@ destinations = [
         "featured": False,
         "description": "Chitwan is famous for jungle safaris, wildlife and the Chitwan National Park."
     },
+
     {
         "id": 7,
         "name": "Bhutan Himalayas",
@@ -115,6 +151,7 @@ destinations = [
         "featured": False,
         "description": "The Bhutan Himalayas combine spectacular mountain landscapes with rich culture and monasteries."
     },
+
     {
         "id": 8,
         "name": "Swiss Alps",
@@ -127,6 +164,7 @@ destinations = [
         "featured": False,
         "description": "The Swiss Alps offer spectacular mountains, hiking routes, villages and winter activities."
     },
+
     {
         "id": 9,
         "name": "Kyoto",
@@ -139,6 +177,7 @@ destinations = [
         "featured": False,
         "description": "Kyoto is famous for traditional temples, gardens, historic streets and Japanese culture."
     }
+
 ]
 
 
@@ -157,6 +196,7 @@ def get_destinations():
     results = destinations
 
     if search:
+
         results = [
             destination
             for destination in results
@@ -167,6 +207,7 @@ def get_destinations():
         ]
 
     if category and category != "all":
+
         results = [
             destination
             for destination in results
@@ -174,6 +215,7 @@ def get_destinations():
         ]
 
     if country and country != "all":
+
         results = [
             destination
             for destination in results
@@ -181,6 +223,7 @@ def get_destinations():
         ]
 
     if region and region != "all":
+
         results = [
             destination
             for destination in results
@@ -211,6 +254,7 @@ def get_destination(destination_id):
     )
 
     if destination is None:
+
         return jsonify({
             "success": False,
             "message": "Destination not found"
@@ -275,6 +319,7 @@ def search_destinations():
     query = request.args.get("q", "").lower().strip()
 
     if not query:
+
         return jsonify({
             "success": True,
             "count": 0,
@@ -308,7 +353,7 @@ def not_found(error):
 
     return jsonify({
         "success": False,
-        "message": "API endpoint not found"
+        "message": "Page or API endpoint not found"
     }), 404
 
 
@@ -326,6 +371,7 @@ def server_error(error):
 # ==========================================
 
 if __name__ == "__main__":
+
     app.run(
         host="127.0.0.1",
         port=5000,

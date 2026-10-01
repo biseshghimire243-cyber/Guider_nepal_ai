@@ -1,463 +1,215 @@
 // ==========================================
-// GUIDER NEPAL AI
-// DESTINATIONS
+// API CONFIGURATION
 // ==========================================
 
+const API_URL = "/api";
+
 
 // ==========================================
-// DESTINATION DATA
+// GLOBAL VARIABLES
 // ==========================================
 
-const destinations = [
+let destinations = [];
+let filteredDestinations = [];
 
-    {
-        id: 1,
 
-        name: "Mount Everest",
+// ==========================================
+// DOM ELEMENTS
+// ==========================================
 
-        country: "Nepal",
+const destinationList = document.getElementById("destinationList");
+const destinationSearch = document.getElementById("destinationSearch");
+const clearSearch = document.getElementById("clearSearch");
+const resultCount = document.getElementById("resultCount");
+const noResults = document.getElementById("noResults");
+const resetFilters = document.getElementById("resetFilters");
+const filterButtons = document.querySelectorAll(".filter-btn");
 
-        category: [
-            "nepal",
-            "himalaya",
-            "adventure"
-        ],
 
-        location: "Solukhumbu, Nepal",
+// ==========================================
+// LOAD DESTINATIONS FROM PYTHON API
+// ==========================================
 
-        difficulty: "Extreme",
+async function loadDestinations() {
 
-        type: "Mountain",
+    try {
 
-        description:
-            "Home to the world's highest mountain and one of the most famous trekking regions on Earth.",
+        destinationList.innerHTML = `
+            <div class="loading-message">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+                Loading destinations...
+            </div>
+        `;
 
-        image:
-            "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+        const response = await fetch(`${API_URL}/destinations`);
 
-        featured: true
-    },
+        if (!response.ok) {
+            throw new Error("Failed to load destinations");
+        }
 
+        const data = await response.json();
 
-    {
-        id: 2,
+        if (!data.success) {
+            throw new Error("API returned an error");
+        }
 
-        name: "Pokhara",
+        destinations = data.destinations;
+        filteredDestinations = [...destinations];
 
-        country: "Nepal",
+        renderDestinations();
 
-        category: [
-            "nepal",
-            "himalaya"
-        ],
+    } catch (error) {
 
-        location: "Gandaki, Nepal",
+        console.error("Destination loading error:", error);
 
-        difficulty: "Easy",
+        destinationList.innerHTML = `
+            <div class="loading-message">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                Unable to load destinations.
+                Please make sure the Python server is running.
+            </div>
+        `;
 
-        type: "City & Nature",
-
-        description:
-            "A beautiful lakeside city surrounded by spectacular Himalayan scenery.",
-
-        image:
-            "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=1000&q=85"
-    },
-
-
-    {
-        id: 3,
-
-        name: "Annapurna",
-
-        country: "Nepal",
-
-        category: [
-            "nepal",
-            "himalaya",
-            "adventure"
-        ],
-
-        location: "Gandaki, Nepal",
-
-        difficulty: "Hard",
-
-        type: "Trekking",
-
-        description:
-            "One of Nepal's most popular trekking destinations with incredible mountain landscapes.",
-
-        image:
-            "https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1000&q=85"
-    },
-
-
-    {
-        id: 4,
-
-        name: "Upper Mustang",
-
-        country: "Nepal",
-
-        category: [
-            "nepal",
-            "himalaya",
-            "adventure"
-        ],
-
-        location: "Mustang, Nepal",
-
-        difficulty: "Moderate",
-
-        type: "Culture & Trekking",
-
-        description:
-            "A dramatic high-altitude region known for ancient villages, monasteries and desert-like landscapes.",
-
-        image:
-            "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1000&q=85"
-    },
-
-
-    {
-        id: 5,
-
-        name: "Kathmandu Valley",
-
-        country: "Nepal",
-
-        category: [
-            "nepal"
-        ],
-
-        location: "Kathmandu, Nepal",
-
-        difficulty: "Easy",
-
-        type: "Culture",
-
-        description:
-            "A cultural treasure filled with ancient temples, historic cities and living traditions.",
-
-        image:
-            "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=1000&q=85"
-    },
-
-
-    {
-        id: 6,
-
-        name: "Chitwan",
-
-        country: "Nepal",
-
-        category: [
-            "nepal",
-            "adventure"
-        ],
-
-        location: "Chitwan, Nepal",
-
-        difficulty: "Easy",
-
-        type: "Wildlife",
-
-        description:
-            "Discover jungles, wildlife and one of Nepal's most famous national parks.",
-
-        image:
-            "https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1000&q=85"
-    },
-
-
-    {
-        id: 7,
-
-        name: "Bhutan Himalayas",
-
-        country: "Bhutan",
-
-        category: [
-            "himalaya",
-            "asia",
-            "adventure"
-        ],
-
-        location: "Bhutan",
-
-        difficulty: "Moderate",
-
-        type: "Mountain",
-
-        description:
-            "Explore dramatic Himalayan landscapes and the unique culture of Bhutan.",
-
-        image:
-            "https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=1000&q=85"
-    },
-
-
-    {
-        id: 8,
-
-        name: "Swiss Alps",
-
-        country: "Switzerland",
-
-        category: [
-            "europe",
-            "adventure"
-        ],
-
-        location: "Switzerland",
-
-        difficulty: "Moderate",
-
-        type: "Mountain",
-
-        description:
-            "Spectacular alpine landscapes, mountain villages and world-class outdoor adventures.",
-
-        image:
-            "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=1000&q=85"
-    },
-
-
-    {
-        id: 9,
-
-        name: "Kyoto",
-
-        country: "Japan",
-
-        category: [
-            "asia"
-        ],
-
-        location: "Japan",
-
-        difficulty: "Easy",
-
-        type: "Culture",
-
-        description:
-            "Discover historic temples, traditional neighborhoods and Japanese culture.",
-
-        image:
-            "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1000&q=85"
+        resultCount.textContent = "0 destinations";
     }
-
-];
-
-
-// ==========================================
-// ELEMENTS
-// ==========================================
-
-const destinationList =
-    document.getElementById(
-        "destinationList"
-    );
-
-const searchInput =
-    document.getElementById(
-        "destinationSearch"
-    );
-
-const resultCount =
-    document.getElementById(
-        "resultCount"
-    );
-
-const noResults =
-    document.getElementById(
-        "noResults"
-    );
-
-const clearSearch =
-    document.getElementById(
-        "clearSearch"
-    );
-
-const resetFilters =
-    document.getElementById(
-        "resetFilters"
-    );
-
-const filterButtons =
-    document.querySelectorAll(
-        ".filter-button"
-    );
-
-const navbar =
-    document.getElementById("navbar");
-
-const menuButton =
-    document.getElementById("menuButton");
-
-const mobileMenu =
-    document.getElementById("mobileMenu");
+}
 
 
 // ==========================================
-// CURRENT FILTER
+// RENDER DESTINATIONS
 // ==========================================
 
-let currentFilter = "all";
-
-
-// ==========================================
-// DISPLAY DESTINATIONS
-// ==========================================
-
-function displayDestinations() {
-
-    const searchValue =
-        searchInput.value
-            .trim()
-            .toLowerCase();
-
-
-    const filteredDestinations =
-        destinations.filter(
-            function (destination) {
-
-                const matchesFilter =
-                    currentFilter === "all" ||
-                    destination.category.includes(
-                        currentFilter
-                    );
-
-
-                const searchableText =
-                    (
-                        destination.name +
-                        " " +
-                        destination.country +
-                        " " +
-                        destination.location +
-                        " " +
-                        destination.type
-                    ).toLowerCase();
-
-
-                const matchesSearch =
-                    searchableText.includes(
-                        searchValue
-                    );
-
-
-                return (
-                    matchesFilter &&
-                    matchesSearch
-                );
-
-            }
-        );
-
+function renderDestinations() {
 
     destinationList.innerHTML = "";
 
-
     resultCount.textContent =
-        `${filteredDestinations.length} destination${
-            filteredDestinations.length !== 1
-                ? "s"
-                : ""
-        }`;
+        `${filteredDestinations.length} destination${filteredDestinations.length !== 1 ? "s" : ""}`;
 
+    if (filteredDestinations.length === 0) {
 
-    if (
-        filteredDestinations.length === 0
-    ) {
-
-        noResults.classList.add("show");
+        noResults.style.display = "block";
 
         return;
-
     }
 
+    noResults.style.display = "none";
 
-    noResults.classList.remove("show");
+    filteredDestinations.forEach(destination => {
 
+        const card = document.createElement("article");
 
-    filteredDestinations.forEach(
-        function (destination) {
+        card.className = "destination-card";
 
-            const card =
-                document.createElement("article");
+        if (destination.featured) {
+            card.classList.add("featured-card");
+        }
 
+        card.innerHTML = `
+            <div class="destination-image">
 
-            card.className =
-                "destination-item";
+                <img
+                    src="${getDestinationImage(destination.name)}"
+                    alt="${destination.name}"
+                    loading="lazy"
+                >
 
+                ${
+                    destination.featured
+                        ? `<span class="featured-badge">
+                            <i class="fa-solid fa-star"></i>
+                            Featured
+                           </span>`
+                        : ""
+                }
 
-            if (destination.featured) {
+                <span class="difficulty-badge">
+                    ${destination.difficulty}
+                </span>
 
-                card.classList.add(
-                    "featured"
-                );
+            </div>
 
-            }
+            <div class="destination-content">
 
+                <div class="destination-location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    ${destination.location}, ${destination.country}
+                </div>
 
-            card.style.backgroundImage =
-                `url("${destination.image}")`;
+                <h3>${destination.name}</h3>
 
+                <p>
+                    ${destination.description}
+                </p>
 
-            card.innerHTML = `
+                <div class="destination-meta">
 
-                <div class="destination-item-overlay"></div>
-
-                <div class="destination-item-content">
-
-                    <span class="destination-country">
-                        ${destination.country}
+                    <span>
+                        <i class="fa-solid fa-mountain"></i>
+                        ${destination.type}
                     </span>
 
-                    <h3>
-                        ${destination.name}
-                    </h3>
-
-                    <p>
-                        ${destination.description}
-                    </p>
-
-                    <div class="destination-meta">
-
-                        <span>
-                            📍 ${destination.location}
-                        </span>
-
-                        <span>
-                            ${destination.type}
-                        </span>
-
-                        <span>
-                            ${destination.difficulty}
-                        </span>
-
-                    </div>
-
-                    <a
-                        href="destination-details.html?id=${destination.id}"
-                        class="destination-explore"
-                    >
-                        Explore Destination →
-                    </a>
+                    <span>
+                        <i class="fa-solid fa-compass"></i>
+                        ${destination.region}
+                    </span>
 
                 </div>
 
-            `;
+                <a
+                    href="destination-details.html?id=${destination.id}"
+                    class="destination-link"
+                >
+                    Explore Destination
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+        `;
+
+        destinationList.appendChild(card);
+    });
+}
 
 
-            destinationList.appendChild(
-                card
-            );
+// ==========================================
+// DESTINATION IMAGES
+// ==========================================
 
-        }
-    );
+function getDestinationImage(name) {
 
+    const images = {
+
+        "Mount Everest":
+            "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
+
+        "Pokhara":
+            "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=1200&q=80",
+
+        "Annapurna":
+            "https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=1200&q=80",
+
+        "Upper Mustang":
+            "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80",
+
+        "Kathmandu Valley":
+            "https://images.unsplash.com/photo-1558799401-1dc9f7a5c5b5?auto=format&fit=crop&w=1200&q=80",
+
+        "Chitwan":
+            "https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1200&q=80",
+
+        "Bhutan Himalayas":
+            "https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=1200&q=80",
+
+        "Swiss Alps":
+            "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=1200&q=80",
+
+        "Kyoto":
+            "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=80"
+    };
+
+    return images[name] || 
+        "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80";
 }
 
 
@@ -465,188 +217,211 @@ function displayDestinations() {
 // SEARCH
 // ==========================================
 
-searchInput.addEventListener(
-    "input",
-    displayDestinations
-);
+function searchDestinations() {
+
+    const searchTerm = destinationSearch.value
+        .toLowerCase()
+        .trim();
+
+    filteredDestinations = destinations.filter(destination => {
+
+        return (
+            destination.name.toLowerCase().includes(searchTerm) ||
+            destination.country.toLowerCase().includes(searchTerm) ||
+            destination.region.toLowerCase().includes(searchTerm) ||
+            destination.category.toLowerCase().includes(searchTerm) ||
+            destination.location.toLowerCase().includes(searchTerm) ||
+            destination.type.toLowerCase().includes(searchTerm)
+        );
+
+    });
+
+    renderDestinations();
+}
 
 
 // ==========================================
 // FILTER
 // ==========================================
 
-filterButtons.forEach(
-    function (button) {
+function filterDestinations(category) {
 
-        button.addEventListener(
-            "click",
-            function () {
+    if (category === "all") {
 
-                filterButtons.forEach(
-                    function (item) {
+        filteredDestinations = [...destinations];
 
-                        item.classList.remove(
-                            "active"
-                        );
+    } else {
 
-                    }
-                );
-
-
-                button.classList.add(
-                    "active"
-                );
-
-
-                currentFilter =
-                    button.dataset.filter;
-
-
-                displayDestinations();
-
-            }
+        filteredDestinations = destinations.filter(destination =>
+            destination.category.toLowerCase() === category.toLowerCase() ||
+            destination.region.toLowerCase() === category.toLowerCase()
         );
-
     }
-);
+
+    renderDestinations();
+}
+
+
+// ==========================================
+// FILTER BUTTONS
+// ==========================================
+
+filterButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        filterButtons.forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        const category = button.dataset.filter;
+
+        filterDestinations(category);
+
+    });
+
+});
+
+
+// ==========================================
+// SEARCH EVENT
+// ==========================================
+
+if (destinationSearch) {
+
+    destinationSearch.addEventListener("input", () => {
+
+        searchDestinations();
+
+        if (destinationSearch.value.trim() !== "") {
+            clearSearch.style.display = "flex";
+        } else {
+            clearSearch.style.display = "none";
+        }
+
+    });
+}
 
 
 // ==========================================
 // CLEAR SEARCH
 // ==========================================
 
-clearSearch.addEventListener(
-    "click",
-    function () {
+if (clearSearch) {
 
-        searchInput.value = "";
+    clearSearch.addEventListener("click", () => {
 
-        displayDestinations();
+        destinationSearch.value = "";
 
-        searchInput.focus();
+        clearSearch.style.display = "none";
 
-    }
-);
+        filterButtons.forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        const allButton = document.querySelector(
+            '.filter-btn[data-filter="all"]'
+        );
+
+        if (allButton) {
+            allButton.classList.add("active");
+        }
+
+        filteredDestinations = [...destinations];
+
+        renderDestinations();
+
+    });
+}
 
 
 // ==========================================
 // RESET FILTERS
 // ==========================================
 
-resetFilters.addEventListener(
-    "click",
-    function () {
+if (resetFilters) {
 
-        searchInput.value = "";
+    resetFilters.addEventListener("click", () => {
 
-        currentFilter = "all";
+        destinationSearch.value = "";
 
+        clearSearch.style.display = "none";
 
-        filterButtons.forEach(
-            function (button) {
+        filterButtons.forEach(btn => {
+            btn.classList.remove("active");
+        });
 
-                button.classList.remove(
-                    "active"
-                );
-
-            }
+        const allButton = document.querySelector(
+            '.filter-btn[data-filter="all"]'
         );
 
+        if (allButton) {
+            allButton.classList.add("active");
+        }
 
-        document
-            .querySelector(
-                '[data-filter="all"]'
-            )
-            .classList.add("active");
+        filteredDestinations = [...destinations];
 
+        renderDestinations();
 
-        displayDestinations();
-
-    }
-);
+    });
+}
 
 
 // ==========================================
-// READ SEARCH FROM URL
+// MOBILE NAVIGATION
 // ==========================================
 
-const urlParams =
-    new URLSearchParams(
-        window.location.search
-    );
+const menuButton = document.getElementById("menuButton");
+const mobileMenu = document.getElementById("mobileMenu");
 
-const urlSearch =
-    urlParams.get("search");
+if (menuButton && mobileMenu) {
 
+    menuButton.addEventListener("click", () => {
 
-if (urlSearch) {
+        mobileMenu.classList.toggle("active");
 
-    searchInput.value =
-        urlSearch;
+        const icon = menuButton.querySelector("i");
+
+        if (mobileMenu.classList.contains("active")) {
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-xmark");
+        } else {
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+        }
+
+    });
 
 }
 
 
 // ==========================================
-// NAVBAR
+// NAVBAR SCROLL
 // ==========================================
 
-window.addEventListener(
-    "scroll",
-    function () {
+window.addEventListener("scroll", () => {
 
-        if (window.scrollY > 40) {
+    const navbar = document.querySelector(".navbar");
 
-            navbar.classList.add(
-                "scrolled"
-            );
+    if (!navbar) return;
 
-        } else {
-
-            navbar.classList.remove(
-                "scrolled"
-            );
-
-        }
-
+    if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+    } else {
+        navbar.classList.remove("scrolled");
     }
-);
 
-
-// ==========================================
-// MOBILE MENU
-// ==========================================
-
-menuButton.addEventListener(
-    "click",
-    function () {
-
-        if (
-            mobileMenu.style.display ===
-            "block"
-        ) {
-
-            mobileMenu.style.display =
-                "none";
-
-        } else {
-
-            mobileMenu.style.display =
-                "block";
-
-        }
-
-    }
-);
+});
 
 
 // ==========================================
 // INITIAL LOAD
 // ==========================================
 
-displayDestinations();
+document.addEventListener("DOMContentLoaded", () => {
 
-console.log(
-    "Destinations loaded:",
-    destinations.length
-);
+    loadDestinations();
+
+});
