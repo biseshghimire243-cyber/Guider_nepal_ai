@@ -1,36 +1,47 @@
 from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
+from werkzeug.security import generate_password_hash, check_password_hash
+import mysql.connector
 import os
+
 
 app = Flask(__name__)
 CORS(app)
 
 
-# ==========================================
-# FRONTEND CONFIGURATION
-# ==========================================
+# ============================================================
+# FRONTEND
+# ============================================================
 
 FRONTEND_FOLDER = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..", "frontend")
 )
 
 
-# ==========================================
-# HOME PAGE
-# ==========================================
+# ============================================================
+# DATABASE
+# ============================================================
+
+def get_db_connection():
+    return mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="",
+        database="himalaya_explorer"
+    )
+
+
+# ============================================================
+# FRONTEND ROUTES
+# ============================================================
 
 @app.route("/")
 def home():
     return send_from_directory(FRONTEND_FOLDER, "index.html")
 
 
-# ==========================================
-# FRONTEND FILES
-# ==========================================
-
 @app.route("/<path:filename>")
 def frontend_files(filename):
-
     file_path = os.path.join(FRONTEND_FOLDER, filename)
 
     if os.path.isfile(file_path):
@@ -42,9 +53,9 @@ def frontend_files(filename):
     }), 404
 
 
-# ==========================================
-# API HEALTH CHECK
-# ==========================================
+# ============================================================
+# HEALTH CHECK
+# ============================================================
 
 @app.route("/api/health")
 def health():
@@ -55,12 +66,11 @@ def health():
     })
 
 
-# ==========================================
+# ============================================================
 # DESTINATIONS
-# ==========================================
+# ============================================================
 
 destinations = [
-
     {
         "id": 1,
         "name": "Mount Everest",
@@ -71,9 +81,8 @@ destinations = [
         "difficulty": "Extreme",
         "type": "Mountain",
         "featured": True,
-        "description": "Mount Everest is the highest mountain in the world and one of Nepal's most iconic destinations."
+        "description": "Explore the world's highest mountain and experience the legendary Everest region."
     },
-
     {
         "id": 2,
         "name": "Pokhara",
@@ -83,10 +92,9 @@ destinations = [
         "location": "Gandaki",
         "difficulty": "Easy",
         "type": "City & Nature",
-        "featured": False,
-        "description": "Pokhara is famous for its lakes, mountain views, adventure activities and peaceful surroundings."
+        "featured": True,
+        "description": "Discover lakes, mountains, adventure activities and beautiful Himalayan views."
     },
-
     {
         "id": 3,
         "name": "Annapurna",
@@ -96,10 +104,9 @@ destinations = [
         "location": "Gandaki",
         "difficulty": "Hard",
         "type": "Trekking",
-        "featured": False,
-        "description": "The Annapurna region offers some of the most popular trekking routes in the Himalayas."
+        "featured": True,
+        "description": "Experience one of the most spectacular trekking regions in the Himalayas."
     },
-
     {
         "id": 4,
         "name": "Upper Mustang",
@@ -110,9 +117,8 @@ destinations = [
         "difficulty": "Moderate",
         "type": "Culture & Trekking",
         "featured": False,
-        "description": "Upper Mustang is known for its unique landscapes, ancient caves, monasteries and Tibetan culture."
+        "description": "Explore the mysterious landscapes, ancient caves and Tibetan culture of Mustang."
     },
-
     {
         "id": 5,
         "name": "Kathmandu Valley",
@@ -122,10 +128,9 @@ destinations = [
         "location": "Kathmandu",
         "difficulty": "Easy",
         "type": "Culture",
-        "featured": False,
-        "description": "Kathmandu Valley is home to historic temples, cultural landmarks and UNESCO World Heritage sites."
+        "featured": True,
+        "description": "Discover temples, heritage sites, traditional architecture and vibrant city life."
     },
-
     {
         "id": 6,
         "name": "Chitwan",
@@ -136,9 +141,8 @@ destinations = [
         "difficulty": "Easy",
         "type": "Wildlife",
         "featured": False,
-        "description": "Chitwan is famous for jungle safaris, wildlife and the Chitwan National Park."
+        "description": "Experience jungle safaris, wildlife and the natural beauty of southern Nepal."
     },
-
     {
         "id": 7,
         "name": "Bhutan Himalayas",
@@ -149,9 +153,8 @@ destinations = [
         "difficulty": "Moderate",
         "type": "Mountain",
         "featured": False,
-        "description": "The Bhutan Himalayas combine spectacular mountain landscapes with rich culture and monasteries."
+        "description": "Explore peaceful Himalayan landscapes and traditional Bhutanese culture."
     },
-
     {
         "id": 8,
         "name": "Swiss Alps",
@@ -162,9 +165,8 @@ destinations = [
         "difficulty": "Moderate",
         "type": "Mountain",
         "featured": False,
-        "description": "The Swiss Alps offer spectacular mountains, hiking routes, villages and winter activities."
+        "description": "Experience dramatic peaks, alpine villages and unforgettable mountain scenery."
     },
-
     {
         "id": 9,
         "name": "Kyoto",
@@ -175,15 +177,10 @@ destinations = [
         "difficulty": "Easy",
         "type": "Culture",
         "featured": False,
-        "description": "Kyoto is famous for traditional temples, gardens, historic streets and Japanese culture."
+        "description": "Discover Japanese temples, gardens, traditions and historic streets."
     }
-
 ]
 
-
-# ==========================================
-# GET ALL DESTINATIONS
-# ==========================================
 
 @app.route("/api/destinations", methods=["GET"])
 def get_destinations():
@@ -193,68 +190,54 @@ def get_destinations():
     country = request.args.get("country", "").lower()
     region = request.args.get("region", "").lower()
 
-    results = destinations
+    filtered = destinations
 
     if search:
-
-        results = [
-            destination
-            for destination in results
+        filtered = [
+            destination for destination in filtered
             if search in destination["name"].lower()
-            or search in destination["country"].lower()
+            or search in destination["description"].lower()
             or search in destination["location"].lower()
-            or search in destination["category"].lower()
         ]
 
-    if category and category != "all":
-
-        results = [
-            destination
-            for destination in results
-            if category == destination["category"].lower()
+    if category:
+        filtered = [
+            destination for destination in filtered
+            if destination["category"].lower() == category
         ]
 
-    if country and country != "all":
-
-        results = [
-            destination
-            for destination in results
-            if country == destination["country"].lower()
+    if country:
+        filtered = [
+            destination for destination in filtered
+            if destination["country"].lower() == country
         ]
 
-    if region and region != "all":
-
-        results = [
-            destination
-            for destination in results
-            if region == destination["region"].lower()
+    if region:
+        filtered = [
+            destination for destination in filtered
+            if destination["region"].lower() == region
         ]
 
     return jsonify({
         "success": True,
-        "count": len(results),
-        "destinations": results
+        "count": len(filtered),
+        "destinations": filtered
     })
 
-
-# ==========================================
-# GET SINGLE DESTINATION
-# ==========================================
 
 @app.route("/api/destinations/<int:destination_id>", methods=["GET"])
 def get_destination(destination_id):
 
     destination = next(
         (
-            item
-            for item in destinations
-            if item["id"] == destination_id
+            destination
+            for destination in destinations
+            if destination["id"] == destination_id
         ),
         None
     )
 
-    if destination is None:
-
+    if not destination:
         return jsonify({
             "success": False,
             "message": "Destination not found"
@@ -266,12 +249,8 @@ def get_destination(destination_id):
     })
 
 
-# ==========================================
-# FEATURED DESTINATIONS
-# ==========================================
-
 @app.route("/api/destinations/featured", methods=["GET"])
-def featured_destinations():
+def get_featured_destinations():
 
     featured = [
         destination
@@ -286,9 +265,9 @@ def featured_destinations():
     })
 
 
-# ==========================================
+# ============================================================
 # COUNTRIES
-# ==========================================
+# ============================================================
 
 @app.route("/api/countries", methods=["GET"])
 def get_countries():
@@ -309,9 +288,9 @@ def get_countries():
     })
 
 
-# ==========================================
+# ============================================================
 # SEARCH
-# ==========================================
+# ============================================================
 
 @app.route("/api/search", methods=["GET"])
 def search_destinations():
@@ -319,7 +298,6 @@ def search_destinations():
     query = request.args.get("q", "").lower().strip()
 
     if not query:
-
         return jsonify({
             "success": True,
             "count": 0,
@@ -331,10 +309,9 @@ def search_destinations():
         for destination in destinations
         if query in destination["name"].lower()
         or query in destination["country"].lower()
-        or query in destination["region"].lower()
         or query in destination["category"].lower()
         or query in destination["location"].lower()
-        or query in destination["type"].lower()
+        or query in destination["description"].lower()
     ]
 
     return jsonify({
@@ -344,21 +321,206 @@ def search_destinations():
     })
 
 
-# ==========================================
+# ============================================================
+# REGISTER
+# ============================================================
+
+@app.route("/api/register", methods=["POST"])
+def register():
+
+    data = request.get_json()
+
+    if not data:
+        return jsonify({
+            "success": False,
+            "message": "No registration data received"
+        }), 400
+
+    name = data.get("name", "").strip()
+    email = data.get("email", "").strip().lower()
+    password = data.get("password", "")
+
+    if not name:
+        return jsonify({
+            "success": False,
+            "message": "Name is required"
+        }), 400
+
+    if not email:
+        return jsonify({
+            "success": False,
+            "message": "Email is required"
+        }), 400
+
+    if not password:
+        return jsonify({
+            "success": False,
+            "message": "Password is required"
+        }), 400
+
+    if len(password) < 6:
+        return jsonify({
+            "success": False,
+            "message": "Password must be at least 6 characters"
+        }), 400
+
+    connection = None
+    cursor = None
+
+    try:
+
+        connection = get_db_connection()
+        cursor = connection.cursor(dictionary=True)
+
+        cursor.execute(
+            "SELECT id FROM users WHERE email = %s",
+            (email,)
+        )
+
+        existing_user = cursor.fetchone()
+
+        if existing_user:
+            return jsonify({
+                "success": False,
+                "message": "An account with this email already exists"
+            }), 409
+
+        hashed_password = generate_password_hash(password)
+
+        cursor.execute(
+            """
+            INSERT INTO users (name, email, password)
+            VALUES (%s, %s, %s)
+            """,
+            (name, email, hashed_password)
+        )
+
+        connection.commit()
+
+        return jsonify({
+            "success": True,
+            "message": "Registration successful"
+        }), 201
+
+    except mysql.connector.Error as error:
+
+        return jsonify({
+            "success": False,
+            "message": "Database error",
+            "error": str(error)
+        }), 500
+
+    finally:
+
+        if cursor:
+            cursor.close()
+
+        if connection:
+            connection.close()
+
+
+# ============================================================
+# LOGIN
+# ============================================================
+
+@app.route("/api/login", methods=["POST"])
+def login():
+
+    data = request.get_json()
+
+    if not data:
+        return jsonify({
+            "success": False,
+            "message": "No login data received"
+        }), 400
+
+    email = data.get("email", "").strip().lower()
+    password = data.get("password", "")
+
+    if not email or not password:
+        return jsonify({
+            "success": False,
+            "message": "Email and password are required"
+        }), 400
+
+    connection = None
+    cursor = None
+
+    try:
+
+        connection = get_db_connection()
+        cursor = connection.cursor(dictionary=True)
+
+        cursor.execute(
+            """
+            SELECT id, name, email, password
+            FROM users
+            WHERE email = %s
+            """,
+            (email,)
+        )
+
+        user = cursor.fetchone()
+
+        if not user:
+            return jsonify({
+                "success": False,
+                "message": "Invalid email or password"
+            }), 401
+
+        password_is_valid = check_password_hash(
+            user["password"],
+            password
+        )
+
+        if not password_is_valid:
+            return jsonify({
+                "success": False,
+                "message": "Invalid email or password"
+            }), 401
+
+        return jsonify({
+            "success": True,
+            "message": "Login successful",
+            "user": {
+                "id": user["id"],
+                "name": user["name"],
+                "email": user["email"]
+            }
+        })
+
+    except mysql.connector.Error as error:
+
+        return jsonify({
+            "success": False,
+            "message": "Database error",
+            "error": str(error)
+        }), 500
+
+    finally:
+
+        if cursor:
+            cursor.close()
+
+        if connection:
+            connection.close()
+
+
+# ============================================================
 # ERROR HANDLERS
-# ==========================================
+# ============================================================
 
 @app.errorhandler(404)
 def not_found(error):
 
     return jsonify({
         "success": False,
-        "message": "Page or API endpoint not found"
+        "message": "Route not found"
     }), 404
 
 
 @app.errorhandler(500)
-def server_error(error):
+def internal_error(error):
 
     return jsonify({
         "success": False,
@@ -366,12 +528,11 @@ def server_error(error):
     }), 500
 
 
-# ==========================================
+# ============================================================
 # RUN SERVER
-# ==========================================
+# ============================================================
 
 if __name__ == "__main__":
-
     app.run(
         host="127.0.0.1",
         port=5000,
