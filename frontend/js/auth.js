@@ -501,3 +501,169 @@ window.addEventListener(
 
     }
 );
+
+
+// ============================================================
+// AUTHENTICATION STATE
+// ============================================================
+
+function getLoggedInUser() {
+    const user = localStorage.getItem("guiderUser");
+
+    if (!user) {
+        return null;
+    }
+
+    try {
+        return JSON.parse(user);
+    } catch (error) {
+        localStorage.removeItem("guiderUser");
+        return null;
+    }
+}
+
+
+// ============================================================
+// UPDATE NAVBAR
+// ============================================================
+
+function updateAuthNavbar() {
+
+    const authNav = document.getElementById("authNav");
+
+    if (!authNav) {
+        return;
+    }
+
+    const user = getLoggedInUser();
+
+    if (user) {
+
+        authNav.innerHTML = `
+            <a href="profile.html" class="auth-user">
+                ${user.name}
+            </a>
+
+            <button
+                type="button"
+                class="auth-logout"
+                id="navLogoutButton"
+            >
+                Logout
+            </button>
+        `;
+
+        const navLogoutButton =
+            document.getElementById("navLogoutButton");
+
+        if (navLogoutButton) {
+            navLogoutButton.addEventListener(
+                "click",
+                logoutUser
+            );
+        }
+
+    } else {
+
+        authNav.innerHTML = `
+            <a href="login.html">
+                Login
+            </a>
+
+            <a href="register.html">
+                Register
+            </a>
+        `;
+    }
+}
+
+
+// ============================================================
+// LOGOUT
+// ============================================================
+
+function logoutUser() {
+
+    localStorage.removeItem("guiderUser");
+
+    window.location.href = "index.html";
+}
+
+
+// ============================================================
+// PROFILE PAGE
+// ============================================================
+
+function loadProfile() {
+
+    const user = getLoggedInUser();
+
+    if (!user) {
+
+        window.location.href = "login.html";
+
+        return;
+    }
+
+    const profileName =
+        document.getElementById("profileName");
+
+    const userName =
+        document.getElementById("userName");
+
+    const userEmail =
+        document.getElementById("userEmail");
+
+    const userId =
+        document.getElementById("userId");
+
+    const profileAvatar =
+        document.getElementById("profileAvatar");
+
+    if (profileName) {
+        profileName.textContent = user.name;
+    }
+
+    if (userName) {
+        userName.textContent = user.name;
+    }
+
+    if (userEmail) {
+        userEmail.textContent = user.email;
+    }
+
+    if (userId) {
+        userId.textContent = user.id;
+    }
+
+    if (profileAvatar) {
+
+        profileAvatar.textContent =
+            user.name.charAt(0).toUpperCase();
+    }
+
+    const logoutButton =
+        document.getElementById("logoutButton");
+
+    if (logoutButton) {
+        logoutButton.addEventListener(
+            "click",
+            logoutUser
+        );
+    }
+}
+
+
+// ============================================================
+// INITIALIZE AUTH
+// ============================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    updateAuthNavbar();
+
+    if (window.location.pathname.endsWith("profile.html")) {
+        loadProfile();
+    }
+
+});
