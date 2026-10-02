@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Trekking | Guider Nepal AI</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        .trekking-hero {
+            min-height: 68vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.45),
+                    rgba(0, 0, 0, 0.78)
+                ),
+                url("https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1800&q=85")
+                center/cover no-repeat;
+        }
+
+        .trekking-hero-content {
+            max-width: 850px;
+        }
+
+        .trekking-tag {
+            color: #d4af37;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .trekking-hero h1 {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            line-height: 1;
+            margin: 18px 0 25px;
+        }
+
+        .trekking-hero h1 span {
+            color: #d4af37;
+        }
+
+        .trekking-hero p {
+            color: #ddd;
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.8;
+            font-size: 1.08rem;
+        }
+
+        .trekking-section {
+            padding: 80px 20px;
+        }
+
+        .trekking-container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .trekking-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .trekking-heading h2 {
+            font-size: 2.6rem;
+            margin-bottom: 12px;
+        }
+
+        .trekking-heading p {
+            max-width: 680px;
+            margin: auto;
+            color: #999;
+            line-height: 1.7;
+        }
+
+        .trek-search {
+            max-width: 650px;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .trek-search input {
+            width: 100%;
+            padding: 17px 55px 17px 20px;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            color: white;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .trek-search input:focus {
+            border-color: #d4af37;
+        }
+
+        .trek-search i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #d4af37;
+        }
+
+        .trek-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 45px;
+        }
+
+        .trek-filter {
+            background: #111;
+            color: #ccc;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 30px;
+            padding: 10px 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .trek-filter:hover,
+        .trek-filter.active {
+            background: #d4af37;
+            color: #111;
+            border-color: #d4af37;
+        }
+
+        .trek-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .trek-card {
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            overflow: hidden;
+            transition: 0.35s ease;
+        }
+
+        .trek-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212,175,55,0.5);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+        }
+
+        .trek-image {
+            height: 230px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trek-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s ease;
+        }
+
+        .trek-card:hover .trek-image img {
+            transform: scale(1.08);
+        }
+
+        .trek-difficulty {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.78);
+            color: #d4af37;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .trek-content {
+            padding: 22px;
+        }
+
+        .trek-location {
+            color: #d4af37;
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+
+        .trek-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .trek-content p {
+            color: #999;
+            line-height: 1.65;
+            font-size: 0.92rem;
+            margin-bottom: 18px;
+        }
+
+        .trek-meta {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 15px 0;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .trek-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #aaa;
+            font-size: 0.82rem;
+        }
+
+        .trek-meta-item i {
+            color: #d4af37;
+        }
+
+        .trek-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 18px;
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .trek-link:hover {
+            gap: 12px;
+        }
+
+        .no-treks {
+            display: none;
+            text-align: center;
+            padding: 50px;
+            color: #999;
+        }
+
+        .trekking-info {
+            margin-top: 80px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .info-card {
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .info-card i {
+            font-size: 2rem;
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+
+        .info-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            color: #999;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .trek-cta {
+            margin-top: 80px;
+            padding: 70px 30px;
+            text-align: center;
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.45),
+                    rgba(0,0,0,0.8)
+                ),
+                url("https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1600&q=85")
+                center/cover;
+        }
+
+        .trek-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .trek-cta p {
+            color: #ddd;
+            max-width: 650px;
+            margin: 0 auto 25px;
+            line-height: 1.7;
+        }
+
+        .trek-cta a {
+            display: inline-block;
+            background: #d4af37;
+            color: #111;
+            text-decoration: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .trek-cta a:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 1000px) {
+            .trek-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .trekking-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .trekking-section {
+                padding: 60px 15px;
+            }
+
+            .trek-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trek-cta {
+                padding: 50px 20px;
+            }
+
+            .trek-cta h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-mountain-sun"></i>
+                Guider Nepal <span>AI</span>
+            </a>
+
+            <div class="nav-links">
+
+                <a href="index.html">Home</a>
+
+                <a href="destinations.html">
+                    Destinations
+                </a>
+
+                <a href="countries.html">
+                    Countries
+                </a>
+
+                <a href="activities.html">
+                    Activities
+                </a>
+
+                <a href="trekking.html" class="active">
+                    Trekking
+                </a>
+
+                <a href="travel-guide.html">
+                    Travel Guide
+                </a>
+
+                <a href="login.html">
+                    Login
+                </a>
+
+                <a href="register.html" class="nav-button">
+                    Get Started
+                </a>
+
+            </div>
+
+            <button class="menu-button" id="menuButton">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+
+
+        <div class="mobile-menu" id="mobileMenu">
+
+            <a href="index.html">Home</a>
+
+            <a href="destinations.html">
+                Destinations
+            </a>
+
+            <a href="countries.html">
+                Countries
+            </a>
+
+            <a href="activities.html">
+                Activities
+            </a>
+
+            <a href="trekking.html" class="active">
+                Trekking
+            </a>
+
+            <a href="travel-guide.html">
+                Travel Guide
+            </a>
+
+            <a href="login.html">
+                Login
+            </a>
+
+            <a href="register.html">
+                Get Started
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="trekking-hero">
+
+        <div class="trekking-hero-content">
+
+            <span class="trekking-tag">
+                Walk Into The Himalayas
+            </span>
+
+            <h1>
+                Trek <span>Nepal</span>
+            </h1>
+
+            <p>
+                Discover legendary Himalayan trails, peaceful mountain
+                villages and unforgettable landscapes through Nepal's
+                most remarkable trekking routes.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- TREKKING -->
+
+    <section class="trekking-section">
+
+        <div class="trekking-container">
+
+            <div class="trekking-heading">
+
+                <h2>
+                    Popular Trekking Routes
+                </h2>
+
+                <p>
+                    Explore some of Nepal's most famous trekking
+                    experiences and find a route that matches your
+                    adventure level.
+                </p>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <div class="trek-search">
+
+                <input
+                    type="text"
+                    id="trekSearch"
+                    placeholder="Search trekking routes..."
+                >
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            </div>
+
+
+            <!-- FILTERS -->
+
+            <div class="trek-filters">
+
+                <button
+                    class="trek-filter active"
+                    data-difficulty="all"
+                >
+                    All
+                </button>
+
+                <button
+                    class="trek-filter"
+                    data-difficulty="Easy"
+                >
+                    Easy
+                </button>
+
+                <button
+                    class="trek-filter"
+                    data-difficulty="Moderate"
+                >
+                    Moderate
+                </button>
+
+                <button
+                    class="trek-filter"
+                    data-difficulty="Hard"
+                >
+                    Hard
+                </button>
+
+                <button
+                    class="trek-filter"
+                    data-difficulty="Extreme"
+                >
+                    Extreme
+                </button>
+
+            </div>
+
+
+            <!-- TREK GRID -->
+
+            <div
+                class="trek-grid"
+                id="trekGrid"
+            ></div>
+
+
+            <div
+                class="no-treks"
+                id="noTreks"
+            >
+
+                <i
+                    class="fa-solid fa-mountain"
+                    style="font-size:2.5rem;color:#d4af37;margin-bottom:15px;"
+                ></i>
+
+                <h3>
+                    No trekking routes found
+                </h3>
+
+                <p>
+                    Try another search or difficulty level.
+                </p>
+
+            </div>
+
+
+            <!-- INFO -->
+
+            <div class="trekking-info">
+
+                <div class="info-card">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    <h3>
+                        Best Seasons
+                    </h3>
+
+                    <p>
+                        Spring and autumn are generally popular
+                        trekking seasons because of favorable
+                        weather and mountain visibility.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <i class="fa-solid fa-person-hiking"></i>
+
+                    <h3>
+                        Choose Your Level
+                    </h3>
+
+                    <p>
+                        From easier scenic walks to demanding
+                        high-altitude routes, choose a trek that
+                        matches your experience.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <i class="fa-solid fa-kit-medical"></i>
+
+                    <h3>
+                        Prepare Carefully
+                    </h3>
+
+                    <p>
+                        Check weather, route conditions, permits,
+                        equipment and local guidance before starting
+                        a trek.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CTA -->
+
+            <div class="trek-cta">
+
+                <h2>
+                    Find Your Himalayan Adventure
+                </h2>
+
+                <p>
+                    Explore destinations across Nepal and discover
+                    where your next journey can take you.
+                </p>
+
+                <a href="destinations.html">
+                    Explore Destinations
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+
+                <h3>
+                    <i class="fa-solid fa-mountain-sun"></i>
+                    Guider Nepal AI
+                </h3>
+
+                <p>
+                    Your intelligent guide to exploring Nepal,
+                    the Himalayas and the world.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="index.html">Home</a>
+
+                <a href="destinations.html">
+                    Destinations
+                </a>
+
+                <a href="countries.html">
+                    Countries
+                </a>
+
+                <a href="activities.html">
+                    Activities
+                </a>
+
+                <a href="trekking.html">
+                    Trekking
+                </a>
+
+                <a href="travel-guide.html">
+                    Travel Guide
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Guider Nepal AI. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/trekking.js"></script>
+
+</body>
+</html>
