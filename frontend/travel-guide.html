@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Travel Guide | Guider Nepal AI</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        .guide-hero {
+            min-height: 65vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.48),
+                    rgba(0, 0, 0, 0.78)
+                ),
+                url("https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1800&q=85")
+                center/cover no-repeat;
+        }
+
+        .guide-hero-content {
+            max-width: 850px;
+        }
+
+        .guide-tag {
+            color: #d4af37;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .guide-hero h1 {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            line-height: 1;
+            margin: 18px 0 25px;
+        }
+
+        .guide-hero h1 span {
+            color: #d4af37;
+        }
+
+        .guide-hero p {
+            max-width: 700px;
+            margin: auto;
+            color: #ddd;
+            line-height: 1.8;
+            font-size: 1.08rem;
+        }
+
+        .guide-section {
+            padding: 80px 20px;
+        }
+
+        .guide-container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .guide-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .guide-heading h2 {
+            font-size: 2.6rem;
+            margin-bottom: 12px;
+        }
+
+        .guide-heading p {
+            max-width: 700px;
+            margin: auto;
+            color: #999;
+            line-height: 1.7;
+        }
+
+        .guide-search {
+            max-width: 650px;
+            margin: 30px auto 45px;
+            position: relative;
+        }
+
+        .guide-search input {
+            width: 100%;
+            padding: 17px 55px 17px 20px;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            color: white;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .guide-search input:focus {
+            border-color: #d4af37;
+        }
+
+        .guide-search i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #d4af37;
+        }
+
+        .guide-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 45px;
+        }
+
+        .guide-filter {
+            background: #111;
+            color: #ccc;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 30px;
+            padding: 10px 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .guide-filter:hover,
+        .guide-filter.active {
+            background: #d4af37;
+            color: #111;
+            border-color: #d4af37;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .guide-card {
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 28px;
+            transition: 0.35s ease;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(212,175,55,0.45);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .guide-icon {
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(212,175,55,0.12);
+            color: #d4af37;
+            border-radius: 14px;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+        }
+
+        .guide-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .guide-card p {
+            color: #999;
+            line-height: 1.65;
+            font-size: 0.92rem;
+        }
+
+        .guide-card ul {
+            margin-top: 18px;
+            padding-left: 20px;
+            color: #aaa;
+        }
+
+        .guide-card li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 0.88rem;
+        }
+
+        .guide-card li::marker {
+            color: #d4af37;
+        }
+
+        .guide-section-title {
+            text-align: center;
+            margin: 80px 0 35px;
+        }
+
+        .guide-section-title h2 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+        }
+
+        .guide-section-title p {
+            color: #999;
+        }
+
+        .season-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .season-card {
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .season-card i {
+            color: #d4af37;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .season-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .season-card p {
+            color: #999;
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .checklist {
+            max-width: 850px;
+            margin: auto;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 30px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .check-item:last-child {
+            border-bottom: none;
+        }
+
+        .check-item input {
+            width: 18px;
+            height: 18px;
+            accent-color: #d4af37;
+            cursor: pointer;
+        }
+
+        .check-item label {
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .guide-cta {
+            margin-top: 80px;
+            padding: 70px 30px;
+            text-align: center;
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.45),
+                    rgba(0,0,0,0.8)
+                ),
+                url("https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1600&q=85")
+                center/cover;
+        }
+
+        .guide-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .guide-cta p {
+            color: #ddd;
+            max-width: 650px;
+            margin: 0 auto 25px;
+            line-height: 1.7;
+        }
+
+        .guide-cta a {
+            display: inline-block;
+            background: #d4af37;
+            color: #111;
+            text-decoration: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        .guide-cta a:hover {
+            transform: translateY(-2px);
+        }
+
+        .no-guides {
+            display: none;
+            text-align: center;
+            padding: 50px;
+            color: #999;
+        }
+
+        @media (max-width: 1000px) {
+            .guide-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .season-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .guide-section {
+                padding: 60px 15px;
+            }
+
+            .guide-grid,
+            .season-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .guide-cta {
+                padding: 50px 20px;
+            }
+
+            .guide-cta h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-mountain-sun"></i>
+                Guider Nepal <span>AI</span>
+            </a>
+
+            <div class="nav-links">
+
+                <a href="index.html">Home</a>
+
+                <a href="destinations.html">
+                    Destinations
+                </a>
+
+                <a href="countries.html">
+                    Countries
+                </a>
+
+                <a href="activities.html">
+                    Activities
+                </a>
+
+                <a href="trekking.html">
+                    Trekking
+                </a>
+
+                <a href="travel-guide.html" class="active">
+                    Travel Guide
+                </a>
+
+                <a href="login.html">
+                    Login
+                </a>
+
+                <a href="register.html" class="nav-button">
+                    Get Started
+                </a>
+
+            </div>
+
+            <button class="menu-button" id="menuButton">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+
+
+        <div class="mobile-menu" id="mobileMenu">
+
+            <a href="index.html">Home</a>
+
+            <a href="destinations.html">
+                Destinations
+            </a>
+
+            <a href="countries.html">
+                Countries
+            </a>
+
+            <a href="activities.html">
+                Activities
+            </a>
+
+            <a href="trekking.html">
+                Trekking
+            </a>
+
+            <a href="travel-guide.html" class="active">
+                Travel Guide
+            </a>
+
+            <a href="login.html">
+                Login
+            </a>
+
+            <a href="register.html">
+                Get Started
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="guide-hero">
+
+        <div class="guide-hero-content">
+
+            <span class="guide-tag">
+                Plan • Prepare • Explore
+            </span>
+
+            <h1>
+                Nepal <span>Travel Guide</span>
+            </h1>
+
+            <p>
+                Everything you need to prepare for your journey through
+                Nepal, from choosing the right season to planning your
+                packing list and transportation.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- GUIDE -->
+
+    <section class="guide-section">
+
+        <div class="guide-container">
+
+            <div class="guide-heading">
+
+                <h2>
+                    Travel Information
+                </h2>
+
+                <p>
+                    Explore practical information to help you prepare
+                    for your Nepal adventure.
+                </p>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <div class="guide-search">
+
+                <input
+                    type="text"
+                    id="guideSearch"
+                    placeholder="Search travel information..."
+                >
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            </div>
+
+
+            <!-- FILTERS -->
+
+            <div class="guide-filters">
+
+                <button
+                    class="guide-filter active"
+                    data-category="all"
+                >
+                    All
+                </button>
+
+                <button
+                    class="guide-filter"
+                    data-category="Planning"
+                >
+                    Planning
+                </button>
+
+                <button
+                    class="guide-filter"
+                    data-category="Transport"
+                >
+                    Transport
+                </button>
+
+                <button
+                    class="guide-filter"
+                    data-category="Safety"
+                >
+                    Safety
+                </button>
+
+                <button
+                    class="guide-filter"
+                    data-category="Packing"
+                >
+                    Packing
+                </button>
+
+                <button
+                    class="guide-filter"
+                    data-category="Budget"
+                >
+                    Budget
+                </button>
+
+            </div>
+
+
+            <!-- GUIDE CARDS -->
+
+            <div
+                class="guide-grid"
+                id="guideGrid"
+            ></div>
+
+
+            <div
+                class="no-guides"
+                id="noGuides"
+            >
+
+                <i
+                    class="fa-solid fa-book-open"
+                    style="font-size:2.5rem;color:#d4af37;margin-bottom:15px;"
+                ></i>
+
+                <h3>
+                    No guide information found
+                </h3>
+
+                <p>
+                    Try another search or category.
+                </p>
+
+            </div>
+
+
+            <!-- SEASONS -->
+
+            <div class="guide-section-title">
+
+                <h2>
+                    When Should You Visit?
+                </h2>
+
+                <p>
+                    Nepal offers different experiences throughout
+                    the year.
+                </p>
+
+            </div>
+
+
+            <div class="season-grid">
+
+                <div class="season-card">
+
+                    <i class="fa-solid fa-seedling"></i>
+
+                    <h3>
+                        Spring
+                    </h3>
+
+                    <p>
+                        A popular period for trekking with blooming
+                        rhododendrons and generally clear mountain views.
+                    </p>
+
+                </div>
+
+
+                <div class="season-card">
+
+                    <i class="fa-solid fa-sun"></i>
+
+                    <h3>
+                        Summer
+                    </h3>
+
+                    <p>
+                        Monsoon conditions affect many regions,
+                        while some rain-shadow areas can remain suitable.
+                    </p>
+
+                </div>
+
+
+                <div class="season-card">
+
+                    <i class="fa-solid fa-leaf"></i>
+
+                    <h3>
+                        Autumn
+                    </h3>
+
+                    <p>
+                        A widely popular trekking period with favorable
+                        conditions and clear mountain scenery.
+                    </p>
+
+                </div>
+
+
+                <div class="season-card">
+
+                    <i class="fa-solid fa-snowflake"></i>
+
+                    <h3>
+                        Winter
+                    </h3>
+
+                    <p>
+                        Lower elevations can be pleasant while
+                        high-altitude areas become colder and snowier.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PACKING CHECKLIST -->
+
+            <div class="guide-section-title">
+
+                <h2>
+                    Packing Checklist
+                </h2>
+
+                <p>
+                    Check the essentials before starting your journey.
+                </p>
+
+            </div>
+
+
+            <div class="checklist">
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="item1"
+                    >
+
+                    <label for="item1">
+                        Passport and important travel documents
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="item2"
+                    >
+
+                    <label for="item2">
+                        Comfortable walking or trekking shoes
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="item3"
+                    >
+
+                    <label for="item3">
+                        Warm layers and weather-appropriate clothing
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="item4"
+                    >
+
+                    <label for="item4">
+                        Water bottle and personal essentials
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="item5"
+                    >
+
+                    <label for="item5">
+                        First-aid and personal medication
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="item6"
+                    >
+
+                    <label for="item6">
+                        Phone, power bank and charging equipment
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="item7"
+                    >
+
+                    <label for="item7">
+                        Sun protection and personal hygiene items
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="item8"
+                    >
+
+                    <label for="item8">
+                        Backpack suitable for your planned trip
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- CTA -->
+
+            <div class="guide-cta">
+
+                <h2>
+                    Start Planning Your Journey
+                </h2>
+
+                <p>
+                    Explore destinations and discover activities
+                    that match your travel plans.
+                </p>
+
+                <a href="destinations.html">
+                    Explore Destinations
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+
+                <h3>
+                    <i class="fa-solid fa-mountain-sun"></i>
+                    Guider Nepal AI
+                </h3>
+
+                <p>
+                    Your intelligent guide to exploring Nepal,
+                    the Himalayas and the world.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="index.html">Home</a>
+
+                <a href="destinations.html">
+                    Destinations
+                </a>
+
+                <a href="countries.html">
+                    Countries
+                </a>
+
+                <a href="activities.html">
+                    Activities
+                </a>
+
+                <a href="trekking.html">
+                    Trekking
+                </a>
+
+                <a href="travel-guide.html">
+                    Travel Guide
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Guider Nepal AI. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/guide.js"></script>
+
+</body>
+</html>
