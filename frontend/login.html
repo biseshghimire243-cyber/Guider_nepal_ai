@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Guider Nepal AI</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px 60px;
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.65),
+                    rgba(0, 0, 0, 0.88)
+                ),
+                url("https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1800&q=85")
+                center/cover no-repeat;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+
+            background: rgba(17, 17, 17, 0.95);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+        }
+
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-logo i {
+            color: #d4af37;
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+        }
+
+        .auth-logo h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .auth-logo h1 span {
+            color: #d4af37;
+        }
+
+        .auth-logo p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #ddd;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper > i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .form-group input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px 45px;
+
+            background: #0b0b0b;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+
+            color: white;
+            outline: none;
+            font-size: 0.95rem;
+        }
+
+        .form-group input:focus {
+            border-color: #d4af37;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            background: none;
+            border: none;
+            color: #777;
+            cursor: pointer;
+        }
+
+        .password-toggle:hover {
+            color: #d4af37;
+        }
+
+        .auth-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+            font-size: 0.85rem;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #999;
+        }
+
+        .remember input {
+            accent-color: #d4af37;
+        }
+
+        .forgot {
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+        .forgot:hover {
+            text-decoration: underline;
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 14px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: #d4af37;
+            color: #111;
+
+            font-size: 1rem;
+            font-weight: 700;
+
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .auth-button:hover {
+            background: #efca50;
+            transform: translateY(-2px);
+        }
+
+        .auth-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            display: none;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+        }
+
+        .message.success {
+            display: block;
+            background: rgba(40, 167, 69, 0.12);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            color: #7ee89b;
+        }
+
+        .message.error {
+            display: block;
+            background: rgba(220, 53, 69, 0.12);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: #ff8d98;
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 25px 0;
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .register-link {
+            text-align: center;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .register-link a {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back-home a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .back-home a:hover {
+            color: #d4af37;
+        }
+
+        @media (max-width: 500px) {
+            .auth-card {
+                padding: 30px 22px;
+            }
+
+            .auth-options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-mountain-sun"></i>
+                Guider Nepal <span>AI</span>
+            </a>
+
+            <div class="nav-links">
+
+                <a href="index.html">Home</a>
+
+                <a href="destinations.html">
+                    Destinations
+                </a>
+
+                <a href="countries.html">
+                    Countries
+                </a>
+
+                <a href="activities.html">
+                    Activities
+                </a>
+
+                <a href="trekking.html">
+                    Trekking
+                </a>
+
+                <a href="travel-guide.html">
+                    Travel Guide
+                </a>
+
+                <a href="login.html" class="active">
+                    Login
+                </a>
+
+                <a href="register.html" class="nav-button">
+                    Get Started
+                </a>
+
+            </div>
+
+            <button class="menu-button" id="menuButton">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+
+        <div class="mobile-menu" id="mobileMenu">
+
+            <a href="index.html">Home</a>
+
+            <a href="destinations.html">
+                Destinations
+            </a>
+
+            <a href="countries.html">
+                Countries
+            </a>
+
+            <a href="activities.html">
+                Activities
+            </a>
+
+            <a href="trekking.html">
+                Trekking
+            </a>
+
+            <a href="travel-guide.html">
+                Travel Guide
+            </a>
+
+            <a href="login.html" class="active">
+                Login
+            </a>
+
+            <a href="register.html">
+                Get Started
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- LOGIN -->
+
+    <main class="auth-page">
+
+        <div class="auth-card">
+
+            <div class="auth-logo">
+
+                <i class="fa-solid fa-mountain-sun"></i>
+
+                <h1>
+                    Welcome Back
+                </h1>
+
+                <p>
+                    Sign in to your Guider Nepal AI account
+                </p>
+
+            </div>
+
+
+            <div
+                id="loginMessage"
+                class="message"
+            ></div>
+
+
+            <form id="loginForm">
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="togglePassword"
+                        >
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="auth-options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="remember"
+                        >
+
+                        Remember me
+
+                    </label>
+
+                    <a
+                        href="#"
+                        class="forgot"
+                        id="forgotPassword"
+                    >
+                        Forgot password?
+                    </a>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-button"
+                    id="loginButton"
+                >
+                    Sign In
+                </button>
+
+            </form>
+
+
+            <div class="auth-divider">
+                OR
+            </div>
+
+
+            <div class="register-link">
+
+                Don't have an account?
+
+                <a href="register.html">
+                    Create one
+                </a>
+
+            </div>
+
+
+            <div class="back-home">
+
+                <a href="index.html">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Home
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script src="js/auth.js"></script>
+
+</body>
+</html>
