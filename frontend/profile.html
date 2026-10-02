@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | Guider Nepal AI</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        .profile-section {
+            min-height: 75vh;
+            padding: 140px 20px 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-card {
+            width: 100%;
+            max-width: 650px;
+            background: #11151c;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 20px;
+            padding: 45px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .profile-avatar {
+            width: 95px;
+            height: 95px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #d4af37, #f5d76e);
+            color: #111;
+            font-size: 38px;
+            font-weight: 700;
+        }
+
+        .profile-header h1 {
+            margin-bottom: 8px;
+        }
+
+        .profile-header p {
+            opacity: 0.7;
+        }
+
+        .profile-info {
+            display: grid;
+            gap: 18px;
+        }
+
+        .info-box {
+            padding: 18px 20px;
+            border-radius: 12px;
+            background: #181d25;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .info-label {
+            display: block;
+            font-size: 13px;
+            opacity: 0.55;
+            margin-bottom: 6px;
+        }
+
+        .info-value {
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .profile-btn {
+            flex: 1;
+            padding: 13px 20px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .home-btn {
+            background: #d4af37;
+            color: #111;
+        }
+
+        .logout-btn {
+            background: #252b35;
+            color: #fff;
+        }
+
+        .logout-btn:hover {
+            background: #8b2d2d;
+        }
+
+        @media (max-width: 600px) {
+            .profile-card {
+                padding: 30px 20px;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                Guider Nepal AI
+            </a>
+
+            <button class="menu-toggle" id="menuToggle">
+                ☰
+            </button>
+
+            <nav class="nav-menu" id="navMenu">
+
+                <a href="index.html">Home</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="countries.html">Countries</a>
+                <a href="activities.html">Activities</a>
+                <a href="trekking.html">Trekking</a>
+                <a href="travel-guide.html">Travel Guide</a>
+                <a href="about.html">About</a>
+
+                <span id="authNav"></span>
+
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- PROFILE -->
+    <main class="profile-section">
+
+        <div class="profile-card">
+
+            <div class="profile-header">
+
+                <div class="profile-avatar" id="profileAvatar">
+                    U
+                </div>
+
+                <h1 id="profileName">
+                    User
+                </h1>
+
+                <p>
+                    Welcome to your Guider Nepal AI profile
+                </p>
+
+            </div>
+
+
+            <div class="profile-info">
+
+                <div class="info-box">
+
+                    <span class="info-label">
+                        Full Name
+                    </span>
+
+                    <div class="info-value" id="userName">
+                        -
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <span class="info-label">
+                        Email Address
+                    </span>
+
+                    <div class="info-value" id="userEmail">
+                        -
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <span class="info-label">
+                        Account ID
+                    </span>
+
+                    <div class="info-value" id="userId">
+                        -
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-actions">
+
+                <a href="index.html" class="profile-btn home-btn">
+                    Explore Nepal
+                </a>
+
+                <button
+                    class="profile-btn logout-btn"
+                    id="logoutButton"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <p>
+                © 2026 Guider Nepal AI. Explore. Discover. Experience.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/auth.js"></script>
+
+</body>
+</html>
