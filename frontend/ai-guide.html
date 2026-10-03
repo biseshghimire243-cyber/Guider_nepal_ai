@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Travel Guide | Guider Nepal AI</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        .ai-page {
+            min-height: 100vh;
+            padding: 130px 20px 70px;
+        }
+
+        .ai-header {
+            max-width: 850px;
+            margin: 0 auto 35px;
+            text-align: center;
+        }
+
+        .ai-header h1 {
+            font-size: 46px;
+            margin-bottom: 15px;
+        }
+
+        .ai-header h1 span {
+            color: #d4af37;
+        }
+
+        .ai-header p {
+            opacity: 0.7;
+            line-height: 1.7;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 900px;
+            height: 650px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            background: #11151c;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 25px;
+            background: #181d25;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .ai-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #d4af37, #f5d76e);
+            color: #111;
+            font-weight: 800;
+        }
+
+        .chat-title h3 {
+            margin: 0 0 4px;
+        }
+
+        .chat-title span {
+            font-size: 13px;
+            color: #7bd88f;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 25px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .message {
+            max-width: 75%;
+            padding: 14px 17px;
+            border-radius: 15px;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .message.ai {
+            align-self: flex-start;
+            background: #1b212a;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: #d4af37;
+            color: #111;
+            border-bottom-right-radius: 4px;
+        }
+
+        .suggestions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            padding: 0 25px 15px;
+        }
+
+        .suggestion {
+            padding: 9px 13px;
+            background: transparent;
+            color: #ddd;
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .suggestion:hover {
+            background: #d4af37;
+            color: #111;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+            padding: 18px;
+            background: #181d25;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        #messageInput {
+            flex: 1;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #0d1015;
+            color: #fff;
+            outline: none;
+            font-size: 15px;
+        }
+
+        #messageInput:focus {
+            border-color: #d4af37;
+        }
+
+        #sendButton {
+            padding: 0 24px;
+            border: none;
+            border-radius: 10px;
+            background: #d4af37;
+            color: #111;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        #sendButton:hover {
+            background: #f5d76e;
+        }
+
+        #sendButton:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .typing {
+            opacity: 0.55;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .ai-page {
+                padding-top: 110px;
+            }
+
+            .ai-header h1 {
+                font-size: 34px;
+            }
+
+            .chat-container {
+                height: 620px;
+            }
+
+            .message {
+                max-width: 88%;
+            }
+
+            .chat-input-area {
+                padding: 12px;
+            }
+
+            #sendButton {
+                padding: 0 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="index.html" class="logo">
+            Guider Nepal AI
+        </a>
+
+        <button class="menu-toggle" id="menuToggle">
+            ☰
+        </button>
+
+        <nav class="nav-menu" id="navMenu">
+
+            <a href="index.html">Home</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="countries.html">Countries</a>
+            <a href="activities.html">Activities</a>
+            <a href="trekking.html">Trekking</a>
+            <a href="travel-guide.html">Travel Guide</a>
+            <a href="ai-guide.html">AI Guide</a>
+            <a href="about.html">About</a>
+
+            <span id="authNav"></span>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main class="ai-page">
+
+    <section class="ai-header">
+
+        <h1>
+            Meet Your <span>AI Travel Guide</span>
+        </h1>
+
+        <p>
+            Ask anything about Nepal, trekking, destinations,
+            activities, travel planning and Himalayan adventures.
+        </p>
+
+    </section>
+
+
+    <section class="chat-container">
+
+        <div class="chat-header">
+
+            <div class="ai-avatar">
+                AI
+            </div>
+
+            <div class="chat-title">
+
+                <h3>
+                    Guider Nepal AI
+                </h3>
+
+                <span>
+                    ● Online Travel Assistant
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="chat-messages" id="chatMessages">
+
+            <div class="message ai">
+
+                Namaste! 👋 I'm your Guider Nepal AI assistant.
+                Ask me about destinations, trekking routes,
+                activities or travel planning in Nepal.
+
+            </div>
+
+        </div>
+
+
+        <div class="suggestions">
+
+            <button
+                class="suggestion"
+                data-question="What are the best places to visit in Nepal?"
+            >
+                Best places in Nepal
+            </button>
+
+            <button
+                class="suggestion"
+                data-question="Tell me about Everest Base Camp Trek."
+            >
+                Everest Base Camp
+            </button>
+
+            <button
+                class="suggestion"
+                data-question="What activities can I do in Pokhara?"
+            >
+                Pokhara activities
+            </button>
+
+            <button
+                class="suggestion"
+                data-question="Help me plan a Nepal trip."
+            >
+                Plan my trip
+            </button>
+
+        </div>
+
+
+        <form class="chat-input-area" id="chatForm">
+
+            <input
+                type="text"
+                id="messageInput"
+                placeholder="Ask your travel question..."
+                autocomplete="off"
+                required
+            >
+
+            <button
+                type="submit"
+                id="sendButton"
+            >
+                Send
+            </button>
+
+        </form>
+
+    </section>
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <p>
+            © 2026 Guider Nepal AI. Explore. Discover. Experience.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script src="js/auth.js"></script>
+<script src="js/ai-guide.js"></script>
+
+</body>
+</html>
