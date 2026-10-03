@@ -506,6 +506,173 @@ def login():
             connection.close()
 
 
+            # ============================================================
+# AI TRAVEL GUIDE
+# ============================================================
+
+@app.route("/api/ai-guide", methods=["POST"])
+def ai_guide():
+
+    data = request.get_json()
+
+    if not data:
+        return jsonify({
+            "success": False,
+            "message": "No message received"
+        }), 400
+
+    message = data.get("message", "").strip()
+
+    if not message:
+        return jsonify({
+            "success": False,
+            "message": "Please enter a travel question"
+        }), 400
+
+    text = message.lower()
+
+    # --------------------------------------------------------
+    # DESTINATION QUESTIONS
+    # --------------------------------------------------------
+
+    if "everest" in text:
+
+        reply = (
+            "Mount Everest is located in the Solukhumbu region of Nepal. "
+            "The Everest Base Camp Trek is one of Nepal's most famous "
+            "trekking experiences. It normally takes around two weeks "
+            "and reaches an altitude of about 5,364 meters at Base Camp."
+        )
+
+    elif "pokhara" in text:
+
+        reply = (
+            "Pokhara is one of Nepal's most popular destinations. "
+            "You can enjoy Phewa Lake, mountain views, boating, "
+            "paragliding, hiking, caves and nearby viewpoints such as "
+            "Sarangkot."
+        )
+
+    elif "annapurna" in text:
+
+        reply = (
+            "The Annapurna region offers several trekking experiences, "
+            "including the Annapurna Circuit and routes around the "
+            "Annapurna mountain range. The region is known for dramatic "
+            "mountain scenery, villages and diverse landscapes."
+        )
+
+    elif "mustang" in text:
+
+        reply = (
+            "Upper Mustang is famous for its dry Himalayan landscape, "
+            "ancient settlements, caves and Tibetan-influenced culture. "
+            "It is a distinctive destination in northern Nepal."
+        )
+
+    elif "chitwan" in text:
+
+        reply = (
+            "Chitwan is known for wildlife and jungle experiences. "
+            "Visitors can explore Chitwan National Park and experience "
+            "wildlife-focused activities and local culture."
+        )
+
+    # --------------------------------------------------------
+    # TREKKING
+    # --------------------------------------------------------
+
+    elif "trek" in text or "trekking" in text:
+
+        reply = (
+            "Nepal has trekking routes for different experience levels. "
+            "Popular options include Everest Base Camp, Annapurna, "
+            "Langtang, Mardi Himal, Ghorepani Poon Hill and Upper Mustang. "
+            "Your choice should depend on fitness, available time, altitude "
+            "and trekking experience."
+        )
+
+    # --------------------------------------------------------
+    # ACTIVITIES
+    # --------------------------------------------------------
+
+    elif "activity" in text or "activities" in text:
+
+        reply = (
+            "Popular activities in Nepal include trekking, mountain "
+            "climbing, paragliding, rafting, wildlife safaris, camping, "
+            "hiking and cultural tours."
+        )
+
+    # --------------------------------------------------------
+    # BEST PLACES
+    # --------------------------------------------------------
+
+    elif (
+        "best place" in text
+        or "places to visit" in text
+        or "where should i visit" in text
+    ):
+
+        reply = (
+            "Some popular places to explore in Nepal include Kathmandu "
+            "Valley for culture, Pokhara for nature and adventure, "
+            "Everest for Himalayan trekking, Annapurna for trekking, "
+            "Chitwan for wildlife and Upper Mustang for Himalayan culture."
+        )
+
+    # --------------------------------------------------------
+    # NEPAL
+    # --------------------------------------------------------
+
+    elif "nepal" in text:
+
+        reply = (
+            "Nepal offers Himalayan trekking, mountain adventures, "
+            "wildlife, cultural heritage, lakes, traditional villages "
+            "and outdoor activities. I can help you explore destinations "
+            "or build a travel plan."
+        )
+
+    # --------------------------------------------------------
+    # GREETING
+    # --------------------------------------------------------
+
+    elif any(
+        word in text
+        for word in [
+            "hello",
+            "hi",
+            "hey",
+            "namaste"
+        ]
+    ):
+
+        reply = (
+            "Namaste! 👋 I'm your Guider Nepal AI assistant. "
+            "Ask me about Nepal, trekking, destinations, activities "
+            "or travel planning."
+        )
+
+    # --------------------------------------------------------
+    # DEFAULT
+    # --------------------------------------------------------
+
+    else:
+
+        reply = (
+            "I can currently help with Nepal destinations, trekking, "
+            "activities and basic travel planning. Try asking me about "
+            "Everest, Pokhara, Annapurna, Mustang, Chitwan or trekking."
+        )
+
+
+    return jsonify({
+        "success": True,
+        "reply": reply
+    })
+
+
 # ============================================================
 # ERROR HANDLERS
 # ============================================================
