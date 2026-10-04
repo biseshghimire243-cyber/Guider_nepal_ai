@@ -499,3 +499,5 @@ Travel Budget Calculator
 Weather Information- Show destination/trek weather and recommended travel periods.
 
 Emergency & Safety Information- Emergency contacts, trekking safety, altitude information, and important travel guidance.
+
+Travel Reviews- Travelers can share experiences, ratings, and recommendations.
