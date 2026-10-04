@@ -471,3 +471,6 @@ This project is currently developed as a personal/academic project.
 
 Why Guider Nepal AI?
 - Explain what makes the platform different from normal travel websites.
+
+AI Travel Assistant
+- Explain how users can interact with AI using natural language.
