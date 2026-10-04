@@ -531,3 +531,5 @@ Travel Journal- Users can record their trips, photos, experiences, and memories.
 👤 User Dashboard 
 
 AI Travel Chatbot — Ask questions like “What can I do in Pokhara for 3 days?”
+
+AI Itinerary Generator
