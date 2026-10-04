@@ -539,3 +539,5 @@ AI Budget Optimization
 AI Packing List Generator
 AI Travel Checklist
 AI Best-Time Recommendation
+AI Food Recommendation
+AI Accommodation Recommenda
