@@ -480,3 +480,6 @@ Personalized Trip Planning
 
 Nepal 77 Districts
 - A dedicated feature for discovering all districts of Nepal.
+
+Trek Comparison
+- Compare treks by difficulty, duration, altitude, cost, and best season.
