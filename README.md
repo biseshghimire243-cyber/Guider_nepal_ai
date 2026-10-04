@@ -496,3 +496,4 @@ Interactive Nepal Map
 
 Travel Budget Calculator
 - Estimate accommodation, food, transportation, permits, and activities.
+Weather Information- Show destination/trek weather and recommended travel periods.
