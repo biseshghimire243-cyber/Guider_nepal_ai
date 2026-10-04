@@ -501,3 +501,5 @@ Weather Information- Show destination/trek weather and recommended travel period
 Emergency & Safety Information- Emergency contacts, trekking safety, altitude information, and important travel guidance.
 
 Travel Reviews- Travelers can share experiences, ratings, and recommendations.
+
+Travel Journal- Users can record their trips, photos, experiences, and memories.
