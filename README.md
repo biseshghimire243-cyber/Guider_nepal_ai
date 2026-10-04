@@ -483,3 +483,9 @@ Nepal 77 Districts
 
 Trek Comparison
 - Compare treks by difficulty, duration, altitude, cost, and best season.
+
+Smart Search
+- Users can search destinations, activities, trekking routes, and travel guides from one place.
+
+Save & Favorites
+- Users can save destinations and trekking routes they want to visit.
