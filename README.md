@@ -474,3 +474,6 @@ Why Guider Nepal AI?
 
 AI Travel Assistant
 - Explain how users can interact with AI using natural language.
+
+Personalized Trip Planning
+- Mention planning based on budget, duration, interests, and travel style.
