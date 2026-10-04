@@ -477,3 +477,6 @@ AI Travel Assistant
 
 Personalized Trip Planning
 - Mention planning based on budget, duration, interests, and travel style.
+
+Nepal 77 Districts
+- A dedicated feature for discovering all districts of Nepal.
