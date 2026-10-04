@@ -493,3 +493,6 @@ Trip Dashboard
 - A personal dashboard where users can manage their planned trips.
 Interactive Nepal Map
 - Click a region/district on the map and explore destinations.
+
+Travel Budget Calculator
+- Estimate accommodation, food, transportation, permits, and activities.
