@@ -468,3 +468,6 @@ https://github.com/biseshghimire243-cyber
 This project is currently developed as a personal/academic project.
 
 © 2026 Bishesh Ghimire. All rights reserved.
+
+Why Guider Nepal AI?
+- Explain what makes the platform different from normal travel websites.
