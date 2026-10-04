@@ -194,3 +194,128 @@ document.addEventListener(
 
     }
 );
+
+/* ==========================================
+   AI TRIP PLANNER
+========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const styleOptions =
+        document.querySelectorAll(".style-option");
+
+    const createTripButton =
+        document.getElementById("createTripPlan");
+
+
+    let selectedStyle = "";
+
+
+    /* ------------------------------------------
+       SELECT TRAVEL STYLE
+    ------------------------------------------ */
+
+    styleOptions.forEach(option => {
+
+        option.addEventListener("click", () => {
+
+            styleOptions.forEach(item => {
+                item.classList.remove("active");
+            });
+
+            option.classList.add("active");
+
+            selectedStyle =
+                option.dataset.style;
+
+        });
+
+    });
+
+
+    /* ------------------------------------------
+       CREATE TRIP PLAN
+    ------------------------------------------ */
+
+    if (createTripButton) {
+
+        createTripButton.addEventListener("click", () => {
+
+            const destination =
+                document.getElementById(
+                    "tripDestination"
+                ).value;
+
+            const duration =
+                document.getElementById(
+                    "tripDuration"
+                ).value;
+
+            const budget =
+                document.getElementById(
+                    "tripBudget"
+                ).value;
+
+
+            if (!destination) {
+                alert(
+                    "Please choose a destination."
+                );
+                return;
+            }
+
+
+            if (!duration) {
+                alert(
+                    "Please select your trip duration."
+                );
+                return;
+            }
+
+
+            if (!selectedStyle) {
+                alert(
+                    "Please choose your travel style."
+                );
+                return;
+            }
+
+
+            if (!budget) {
+                alert(
+                    "Please select your budget."
+                );
+                return;
+            }
+
+
+            const tripData = {
+                destination,
+                duration,
+                style: selectedStyle,
+                budget
+            };
+
+
+            localStorage.setItem(
+                "guiderTripPlan",
+                JSON.stringify(tripData)
+            );
+
+
+            /*
+             * For now we show a temporary message.
+             *
+             * Later this button will send the
+             * information to our Python AI backend.
+             */
+
+            alert(
+                `Your ${duration}-day ${selectedStyle} trip to ${destination} is ready to be planned!`
+            );
+
+        });
+
+    }
+
+});
