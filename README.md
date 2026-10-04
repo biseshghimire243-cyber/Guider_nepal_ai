@@ -489,3 +489,5 @@ Smart Search
 
 Save & Favorites
 - Users can save destinations and trekking routes they want to visit.
+Trip Dashboard
+- A personal dashboard where users can manage their planned trips.
