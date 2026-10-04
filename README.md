@@ -505,3 +505,14 @@ Travel Reviews- Travelers can share experiences, ratings, and recommendations.
 Travel Journal- Users can record their trips, photos, experiences, and memories.
 1. Future Mobile App
 - Mention that the platform could later be expanded into Android/iOS.
+🔎 Discover
+      ↓
+🏔️ Explore
+      ↓
+🤖 Ask AI
+      ↓
+🗺️ Build Your Trip
+      ↓
+💰 Check Your Budget
+      ↓
+🎒 Start Your Journey
