@@ -534,3 +534,4 @@ AI Travel Chatbot — Ask questions like “What can I do in Pokhara for 3 days?
 
 AI Itinerary Generator
 AI Destination Recommendation
+AI Trek Recommendation
