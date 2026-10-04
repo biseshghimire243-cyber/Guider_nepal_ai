@@ -1120,3 +1120,418 @@ img {
 
     font-size: 11px;
 }
+
+/* ==========================================
+   AI TRIP PLANNER
+========================================== */
+
+.ai-planner-section {
+    position: relative;
+    padding: 120px 6%;
+    overflow: hidden;
+}
+
+.ai-planner-heading {
+    max-width: 750px;
+    margin: 0 auto 55px;
+    text-align: center;
+}
+
+.ai-planner-heading span {
+    display: inline-block;
+    color: #D4AF37;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.ai-planner-heading h2 {
+    margin-bottom: 18px;
+}
+
+.ai-planner-heading h2 em {
+    color: #D4AF37;
+    font-style: normal;
+}
+
+.ai-planner-heading p {
+    color: #A8AFBA;
+    line-height: 1.8;
+}
+
+
+/* Main card */
+
+.ai-planner-card {
+    position: relative;
+    max-width: 1200px;
+    min-height: 620px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(212, 175, 55, 0.08),
+            rgba(17, 21, 28, 0.95)
+        );
+
+    border: 1px solid rgba(212, 175, 55, 0.18);
+    border-radius: 28px;
+    overflow: hidden;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.35);
+}
+
+
+/* Left */
+
+.planner-content {
+    padding: 55px;
+    position: relative;
+    z-index: 2;
+}
+
+.planner-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 9px 15px;
+
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 30px;
+
+    color: #D4AF37;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+
+    background: rgba(212, 175, 55, 0.06);
+
+    margin-bottom: 25px;
+}
+
+.planner-badge span {
+    font-size: 14px;
+}
+
+.planner-content h3 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(35px, 4vw, 52px);
+    line-height: 1.1;
+
+    margin-bottom: 18px;
+}
+
+.planner-content > p {
+    color: #A8AFBA;
+    line-height: 1.8;
+    max-width: 620px;
+    margin-bottom: 35px;
+}
+
+
+/* Form */
+
+.planner-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+}
+
+.planner-field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.planner-field label {
+    color: #D9DCE1;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.planner-input {
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 0 15px;
+
+    background: rgba(7, 9, 14, 0.8);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+
+    transition: 0.3s ease;
+}
+
+.planner-input:focus-within {
+    border-color: rgba(212, 175, 55, 0.6);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.06);
+}
+
+.planner-input span {
+    font-size: 17px;
+}
+
+.planner-input select {
+    width: 100%;
+    height: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #F5F5F5;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+.planner-input select option {
+    background: #11151C;
+    color: white;
+}
+
+
+/* Travel styles */
+
+.planner-style-field {
+    grid-column: 1 / -1;
+}
+
+.travel-style-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.style-option {
+    padding: 10px 15px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 30px;
+
+    background: rgba(7, 9, 14, 0.65);
+
+    color: #A8AFBA;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.style-option:hover,
+.style-option.active {
+    background: rgba(212, 175, 55, 0.12);
+    border-color: #D4AF37;
+    color: #F5D76E;
+    transform: translateY(-2px);
+}
+
+
+/* Button */
+
+.ai-plan-button {
+    margin-top: 32px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 15px 24px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #D4AF37,
+        #F5D76E
+    );
+
+    color: #080A0F;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+
+    box-shadow:
+        0 10px 30px rgba(212, 175, 55, 0.15);
+}
+
+.ai-plan-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 35px rgba(212, 175, 55, 0.25);
+}
+
+.button-arrow {
+    font-size: 18px;
+}
+
+
+/* Right image */
+
+.planner-visual {
+    position: relative;
+    min-height: 620px;
+    overflow: hidden;
+}
+
+.planner-visual img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 1s ease;
+}
+
+.ai-planner-card:hover .planner-visual img {
+    transform: scale(1.05);
+}
+
+.planner-visual-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #11151C 0%,
+            rgba(17, 21, 28, 0.15) 45%,
+            rgba(7, 9, 14, 0.2) 100%
+        );
+}
+
+.planner-glow {
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    right: -100px;
+    top: -100px;
+
+    background: rgba(212, 175, 55, 0.18);
+
+    filter: blur(80px);
+
+    z-index: 1;
+}
+
+.planner-visual-text {
+    position: absolute;
+
+    left: 40px;
+    bottom: 40px;
+
+    z-index: 3;
+}
+
+.planner-visual-text span {
+    color: #F5D76E;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.planner-visual-text h4 {
+    margin: 8px 0;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 36px;
+}
+
+.planner-visual-text p {
+    color: #E2E4E7;
+    font-size: 12px;
+}
+
+
+/* ==========================================
+   AI PLANNER RESPONSIVE
+========================================== */
+
+@media (max-width: 950px) {
+
+    .ai-planner-card {
+        grid-template-columns: 1fr;
+    }
+
+    .planner-visual {
+        min-height: 400px;
+    }
+
+    .planner-visual-overlay {
+        background:
+            linear-gradient(
+                0deg,
+                rgba(7, 9, 14, 0.85),
+                transparent
+            );
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .ai-planner-section {
+        padding: 80px 5%;
+    }
+
+    .planner-content {
+        padding: 30px 24px;
+    }
+
+    .planner-form {
+        grid-template-columns: 1fr;
+    }
+
+    .planner-style-field {
+        grid-column: auto;
+    }
+
+    .planner-visual {
+        min-height: 330px;
+    }
+
+    .planner-visual-text {
+        left: 25px;
+        bottom: 25px;
+    }
+
+    .planner-visual-text h4 {
+        font-size: 28px;
+    }
+
+    .ai-plan-button {
+        width: 100%;
+        justify-content: center;
+    }
+}
