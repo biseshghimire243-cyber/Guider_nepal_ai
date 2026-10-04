@@ -516,3 +516,16 @@ Travel Journal- Users can record their trips, photos, experiences, and memories.
 💰 Check Your Budget
       ↓
 🎒 Start Your Journey
+🏔️ Destination Explorer
+🥾 Trekking Explorer
+🎯 Activities
+🌏 Countries
+🗺️ Nepal 77 Districts
+🤖 AI Trip Planner
+💰 Budget Planner
+🌦️ Weather
+📖 Travel Guide
+⭐ Reviews & Ratings
+❤️ Favorites
+📔 Travel Journal
+👤 User Dashboard
