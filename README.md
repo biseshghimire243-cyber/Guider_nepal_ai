@@ -491,3 +491,5 @@ Save & Favorites
 - Users can save destinations and trekking routes they want to visit.
 Trip Dashboard
 - A personal dashboard where users can manage their planned trips.
+Interactive Nepal Map
+- Click a region/district on the map and explore destinations.
