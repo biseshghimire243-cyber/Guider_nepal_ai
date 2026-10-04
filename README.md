@@ -536,3 +536,4 @@ AI Itinerary Generator
 AI Destination Recommendation
 AI Trek Recommendation
 AI Budget Optimization
+AI Packing List Generator
