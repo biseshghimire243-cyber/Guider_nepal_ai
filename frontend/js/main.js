@@ -319,3 +319,63 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+
+/* ==========================================
+   SEASON SELECTOR
+========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const seasonTabs =
+        document.querySelectorAll(".season-tab");
+
+    const seasonPanels =
+        document.querySelectorAll(".season-panel");
+
+
+    seasonTabs.forEach(tab => {
+
+        tab.addEventListener("click", () => {
+
+            const selectedSeason =
+                tab.dataset.season;
+
+
+            /* Remove active tab */
+
+            seasonTabs.forEach(item => {
+                item.classList.remove("active");
+            });
+
+
+            /* Activate selected tab */
+
+            tab.classList.add("active");
+
+
+            /* Hide all panels */
+
+            seasonPanels.forEach(panel => {
+                panel.classList.remove("active");
+            });
+
+
+            /* Show selected panel */
+
+            const selectedPanel =
+                document.querySelector(
+                    `.season-panel[data-panel="${selectedSeason}"]`
+                );
+
+
+            if (selectedPanel) {
+
+                selectedPanel.classList.add("active");
+
+            }
+
+        });
+
+    });
+
+});
