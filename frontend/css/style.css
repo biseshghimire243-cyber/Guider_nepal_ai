@@ -2991,3 +2991,226 @@ img {
     }
 
 }
+
+/* ==========================================
+   TRAVELER REVIEWS
+========================================== */
+
+.reviews-section {
+    padding: 110px 7%;
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(212, 175, 55, 0.07),
+            transparent 35%
+        ),
+        #07090E;
+}
+
+.reviews-heading {
+    max-width: 700px;
+    margin: 0 auto 35px;
+    text-align: center;
+}
+
+.reviews-heading h2 {
+    margin-bottom: 18px;
+}
+
+
+/* Rating */
+
+.reviews-rating {
+    width: fit-content;
+    margin: 0 auto 55px;
+    text-align: center;
+}
+
+.rating-score {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 5px;
+}
+
+.rating-score strong {
+    font-size: 4rem;
+    font-family: "Playfair Display", serif;
+    color: #F5D76E;
+}
+
+.rating-score span {
+    color: #A8AFBA;
+    font-size: 1.1rem;
+}
+
+.rating-stars {
+    margin: 4px 0 8px;
+    color: #D4AF37;
+    font-size: 1.3rem;
+    letter-spacing: 4px;
+}
+
+.reviews-rating p {
+    margin: 0;
+    color: #7F8793;
+    font-size: 0.9rem;
+}
+
+
+/* Review Grid */
+
+.reviews-grid {
+    max-width: 1250px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+
+/* Review Card */
+
+.review-card {
+    padding: 28px;
+    background: #11151C;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 18px;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(212, 175, 55, 0.4);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+
+/* User */
+
+.review-top {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 20px;
+}
+
+.review-avatar {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #D4AF37,
+            #8F7420
+        );
+
+    color: #07090E;
+    font-weight: 800;
+    font-size: 0.85rem;
+}
+
+.review-top h3 {
+    margin: 0 0 4px;
+
+    color: #FFFFFF;
+    font-size: 1rem;
+}
+
+.review-top span {
+    color: #7F8793;
+    font-size: 0.8rem;
+}
+
+
+/* Stars */
+
+.review-stars {
+    margin-bottom: 16px;
+
+    color: #D4AF37;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+}
+
+
+/* Review Text */
+
+.review-card p {
+    margin: 0 0 22px;
+
+    color: #A8AFBA;
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+
+/* Trip */
+
+.review-trip {
+    display: inline-block;
+
+    padding: 6px 11px;
+
+    border-radius: 20px;
+
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.18);
+
+    color: #D4AF37;
+
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+
+/* CTA */
+
+.reviews-cta {
+    margin-top: 45px;
+    text-align: center;
+}
+
+
+/* ==========================================
+   REVIEWS RESPONSIVE
+========================================== */
+
+@media (max-width: 1100px) {
+
+    .reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .reviews-section {
+        padding: 80px 5%;
+    }
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rating-score strong {
+        font-size: 3.2rem;
+    }
+
+}
