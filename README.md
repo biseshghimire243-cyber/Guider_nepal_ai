@@ -541,3 +541,25 @@ AI Travel Checklist
 AI Best-Time Recommendation
 AI Food Recommendation
 AI Accommodation Recommenda
+
+🏔️ HERO
+   ↓
+🔎 AI TRIP PLANNER
+   ↓
+🌏 EXPLORE NEPAL BY REGION
+   ↓
+🥾 TOP TREKKING ROUTES
+   ↓
+🌦️ BEST TIME TO VISIT
+   ↓
+⭐ FEATURED DESTINATIONS
+   ↓
+🎯 EXPERIENCES
+   ↓
+🤖 AI SECTION
+   ↓
+💡 WHY GUIDER NEPAL AI
+   ↓
+📢 FINAL CTA
+   ↓
+FOOTER
