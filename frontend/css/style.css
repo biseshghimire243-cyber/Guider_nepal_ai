@@ -2147,3 +2147,495 @@ img {
         min-height: auto;
     }
 }
+
+/* ==========================================
+   BEST TIME TO VISIT NEPAL
+========================================== */
+
+.seasons-section {
+    padding: 120px 6%;
+    position: relative;
+}
+
+.seasons-heading {
+    max-width: 720px;
+    margin: 0 auto 50px;
+    text-align: center;
+}
+
+.seasons-heading > span {
+    display: inline-block;
+
+    color: #D4AF37;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 15px;
+}
+
+.seasons-heading h2 {
+    margin-bottom: 18px;
+}
+
+.seasons-heading h2 em {
+    color: #D4AF37;
+    font-style: normal;
+}
+
+.seasons-heading p {
+    color: #A8AFBA;
+    line-height: 1.8;
+}
+
+
+/* ==========================================
+   SEASON CONTAINER
+========================================== */
+
+.seasons-container {
+    max-width: 1250px;
+    margin: auto;
+}
+
+
+/* ==========================================
+   SEASON TABS
+========================================== */
+
+.season-tabs {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 18px;
+}
+
+.season-tab {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    min-height: 105px;
+
+    padding: 18px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 14px;
+
+    background: #11151C;
+
+    color: #A8AFBA;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+        all 0.3s ease;
+}
+
+.season-tab span {
+    font-size: 23px;
+}
+
+.season-tab strong {
+    color: #D9DCE1;
+
+    font-size: 13px;
+}
+
+.season-tab small {
+    color: #707783;
+
+    font-size: 10px;
+}
+
+.season-tab:hover {
+    border-color:
+        rgba(212, 175, 55, 0.3);
+
+    transform: translateY(-2px);
+}
+
+.season-tab.active {
+    border-color: #D4AF37;
+
+    background:
+        rgba(212, 175, 55, 0.08);
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.15);
+}
+
+.season-tab.active strong {
+    color: #F5D76E;
+}
+
+
+/* ==========================================
+   SEASON PANEL
+========================================== */
+
+.season-content {
+    position: relative;
+}
+
+.season-panel {
+    display: none;
+
+    grid-template-columns:
+        1fr 0.95fr;
+
+    min-height: 510px;
+
+    overflow: hidden;
+
+    background: #11151C;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 22px;
+
+    animation:
+        seasonFade 0.45s ease;
+}
+
+.season-panel.active {
+    display: grid;
+}
+
+@keyframes seasonFade {
+
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* ==========================================
+   SEASON INFO
+========================================== */
+
+.season-info {
+    padding: 55px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+.season-label {
+    color: #D4AF37;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 15px;
+}
+
+.season-info h3 {
+    color: #FFFFFF;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 44px;
+
+    margin-bottom: 18px;
+}
+
+.season-info > p {
+    max-width: 540px;
+
+    color: #A8AFBA;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    margin-bottom: 30px;
+}
+
+
+/* ==========================================
+   HIGHLIGHTS
+========================================== */
+
+.season-highlights {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+
+    margin-bottom: 30px;
+}
+
+.season-highlights div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 15px 12px;
+
+    background:
+        rgba(7, 9, 14, 0.55);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.05);
+
+    border-radius: 10px;
+}
+
+.season-highlights span {
+    font-size: 18px;
+
+    margin-bottom: 2px;
+}
+
+.season-highlights strong {
+    color: #D9DCE1;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+.season-highlights small {
+    color: #707783;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+}
+
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+.season-button {
+    width: fit-content;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px 20px;
+
+    border:
+        1px solid
+        rgba(212, 175, 55, 0.4);
+
+    border-radius: 8px;
+
+    color: #F5D76E;
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    transition:
+        all 0.3s ease;
+}
+
+.season-button:hover {
+    background:
+        rgba(212, 175, 55, 0.1);
+
+    border-color: #D4AF37;
+
+    gap: 14px;
+}
+
+
+/* ==========================================
+   SEASON IMAGE
+========================================== */
+
+.season-image {
+    position: relative;
+
+    min-height: 510px;
+
+    overflow: hidden;
+}
+
+.season-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.8s ease;
+}
+
+.season-panel:hover
+.season-image img {
+    transform: scale(1.04);
+}
+
+.season-image-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #11151C 0%,
+            rgba(17, 21, 28, 0.1) 35%,
+            rgba(7, 9, 14, 0.1) 100%
+        );
+}
+
+.season-image-caption {
+    position: absolute;
+
+    left: 30px;
+    bottom: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.season-image-caption span {
+    color: #F5D76E;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.season-image-caption strong {
+    color: white;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 18px;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 850px) {
+
+    .seasons-section {
+        padding: 80px 5%;
+    }
+
+    .season-tabs {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .season-panel.active {
+        grid-template-columns: 1fr;
+    }
+
+    .season-image {
+        min-height: 360px;
+        order: -1;
+    }
+
+    .season-image-overlay {
+        background:
+            linear-gradient(
+                0deg,
+                rgba(7, 9, 14, 0.7),
+                transparent
+            );
+    }
+
+    .season-info {
+        padding: 35px;
+    }
+
+    .season-info h3 {
+        font-size: 38px;
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .season-tabs {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .season-tab {
+        min-height: 90px;
+        padding: 12px;
+    }
+
+    .season-tab span {
+        font-size: 19px;
+    }
+
+    .season-tab strong {
+        font-size: 11px;
+    }
+
+    .season-info {
+        padding: 27px 22px;
+    }
+
+    .season-info h3 {
+        font-size: 32px;
+    }
+
+    .season-highlights {
+        grid-template-columns: 1fr;
+    }
+
+    .season-image {
+        min-height: 280px;
+    }
+
+}
