@@ -2639,3 +2639,355 @@ img {
     }
 
 }
+
+ /* ==========================================
+    TRAVEL STORIES & GUIDES
+ ========================================== */
+
+.stories-section {
+    padding: 120px 6%;
+    position: relative;
+}
+
+.stories-heading {
+    max-width: 720px;
+    margin: 0 auto 55px;
+    text-align: center;
+}
+
+.stories-heading > span {
+    display: inline-block;
+
+    color: #D4AF37;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 15px;
+}
+
+.stories-heading h2 {
+    margin-bottom: 18px;
+}
+
+.stories-heading h2 em {
+    color: #D4AF37;
+    font-style: normal;
+}
+
+.stories-heading p {
+    color: #A8AFBA;
+
+    line-height: 1.8;
+}
+
+
+/* ==========================================
+   STORIES GRID
+ ========================================== */
+
+.stories-grid {
+    max-width: 1250px;
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 24px;
+}
+
+
+/* ==========================================
+   STORY CARD
+ ========================================== */
+
+.story-card {
+    overflow: hidden;
+
+    background: #11151C;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 20px;
+
+    transition:
+        transform 0.4s ease,
+        border-color 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.story-card:hover {
+    transform: translateY(-7px);
+
+    border-color:
+        rgba(212, 175, 55, 0.3);
+
+    box-shadow:
+        0 20px 50px
+        rgba(0, 0, 0, 0.3);
+}
+
+
+/* ==========================================
+   FEATURED STORY
+ ========================================== */
+
+.story-featured {
+    grid-column: span 2;
+
+    display: grid;
+
+    grid-template-columns:
+        1.15fr 0.85fr;
+}
+
+
+/* ==========================================
+   IMAGE
+ ========================================== */
+
+.story-image {
+    position: relative;
+
+    height: 300px;
+
+    overflow: hidden;
+}
+
+.story-featured .story-image {
+    height: 100%;
+    min-height: 360px;
+}
+
+.story-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.8s ease;
+}
+
+.story-card:hover .story-image img {
+    transform: scale(1.07);
+}
+
+.story-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(7, 9, 14, 0.05),
+            rgba(7, 9, 14, 0.6)
+        );
+}
+
+
+/* ==========================================
+   CATEGORY
+ ========================================== */
+
+.story-category {
+    position: absolute;
+
+    top: 20px;
+    left: 20px;
+
+    padding: 7px 11px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(7, 9, 14, 0.75);
+
+    backdrop-filter: blur(8px);
+
+    border:
+        1px solid
+        rgba(212, 175, 55, 0.35);
+
+    color: #F5D76E;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+/* ==========================================
+   STORY CONTENT
+ ========================================== */
+
+.story-content {
+    padding: 28px;
+}
+
+.story-featured .story-content {
+    padding: 45px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+.story-meta {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-bottom: 13px;
+
+    color: #707783;
+
+    font-size: 10px;
+}
+
+.story-content h3 {
+    margin-bottom: 13px;
+
+    color: #FFFFFF;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 25px;
+
+    line-height: 1.25;
+}
+
+.story-featured .story-content h3 {
+    font-size: 36px;
+}
+
+.story-content p {
+    margin-bottom: 20px;
+
+    color: #A8AFBA;
+
+    font-size: 12px;
+
+    line-height: 1.75;
+}
+
+
+/* ==========================================
+   STORY LINK
+ ========================================== */
+
+.story-link {
+    width: fit-content;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: #F5D76E;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        gap 0.3s ease;
+}
+
+.story-link:hover {
+    gap: 14px;
+}
+
+.story-link span {
+    font-size: 16px;
+}
+
+
+/* ==========================================
+   CTA
+ ========================================== */
+
+.stories-cta {
+    margin-top: 50px;
+
+    text-align: center;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+ ========================================== */
+
+@media (max-width: 850px) {
+
+    .stories-section {
+        padding: 80px 5%;
+    }
+
+    .stories-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .story-featured {
+        grid-column: auto;
+
+        display: block;
+    }
+
+    .story-featured .story-image {
+        min-height: 330px;
+        height: 330px;
+    }
+
+    .story-featured .story-content {
+        padding: 30px;
+    }
+
+    .story-featured .story-content h3 {
+        font-size: 30px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .story-image,
+    .story-featured .story-image {
+        height: 250px;
+        min-height: 250px;
+    }
+
+    .story-content,
+    .story-featured .story-content {
+        padding: 23px;
+    }
+
+    .story-content h3,
+    .story-featured .story-content h3 {
+        font-size: 23px;
+    }
+
+    .story-content p {
+        font-size: 11px;
+    }
+
+}
