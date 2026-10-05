@@ -562,4 +562,26 @@ AI Accommodation Recommenda
    ↓
 📢 FINAL CTA
    ↓
+FOOTER  
+
+🏔️ HERO
+      ↓
+🤖 AI TRIP PLANNER
+      ↓
+🌏 EXPLORE NEPAL BY REGION
+      ↓
+🥾 TOP TREKKING ROUTES
+      ↓
+🌦️ BEST TIME TO VISIT
+      ↓
+📖 TRAVEL STORIES & GUIDES
+      ↓
+⭐ FEATURED DESTINATIONS
+      ↓
+🎯 EXPERIENCES
+      ↓
+🤖 WHY GUIDER NEPAL AI
+      ↓
+📢 FINAL CTA
+      ↓
 FOOTER
