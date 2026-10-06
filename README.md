@@ -612,3 +612,31 @@ WHY GUIDER NEPAL AI
 FINAL CTA
    ↓
 FOOTER
+
+🏔️ HERO
+       ↓
+🤖 AI TRIP PLANNER
+       ↓
+🗺️ EXPLORE NEPAL BY REGION
+       ↓
+🥾 TOP TREKKING ROUTES
+       ↓
+🌤️ BEST TIME TO VISIT
+       ↓
+📖 TRAVEL STORIES
+       ↓
+⭐ TRAVELER REVIEWS
+       ↓
+📸 NEPAL PHOTO GALLERY
+       ↓
+📍 FEATURED DESTINATIONS
+       ↓
+🌄 EXPERIENCES
+       ↓
+🤖 AI GUIDE
+       ↓
+✨ WHY GUIDER NEPAL AI
+       ↓
+🚀 FINAL CTA
+       ↓
+FOOTER
